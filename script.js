@@ -152,6 +152,7 @@ function resetTiles() {
 function resetTrialState() {
   attempts = 0;
   resetTiles();
+  [...grid.children].forEach((tile) => (tile.disabled = false));
   feedback.textContent = baseFeedback;
   feedback.className = "feedback";
 }
@@ -199,6 +200,7 @@ startBtn.addEventListener("click", startTrial);
     kickstartAudio();
     toggleTile(e);
     handleSubmit();
+    tile.disabled = true;
     resetTiles();
   })
 );
