@@ -539,3 +539,175 @@ h2 {
     text-align: center;
   }
 }
+
+/* ===== SIGILLATIONSKREIS PUZZLE ===== */
+
+.card__header > div:first-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.puzzle-hud {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.puzzle-counters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.puzzle-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.counter {
+  background: var(--accent);
+  border: 1px solid rgba(198, 166, 103, 0.25);
+  border-radius: 12px;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+  min-width: 68px;
+}
+
+.counter__label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.counter__value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+.graph-board {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin: 1.5rem auto 0.5rem;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.graph-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.edge {
+  stroke: rgba(198, 166, 103, 0.22);
+  stroke-width: 0.6;
+  stroke-linecap: round;
+  transition: stroke 200ms ease, stroke-width 200ms ease;
+}
+
+.edge--highlight {
+  stroke: rgba(232, 210, 159, 0.82);
+  stroke-width: 1.2;
+}
+
+.node {
+  position: absolute;
+  left: var(--nx);
+  top: var(--ny);
+  transform: translate(-50%, -50%);
+  width: clamp(48px, 12.5vw, 56px);
+  height: clamp(48px, 12.5vw, 56px);
+  border-radius: 50%;
+  border: 2px solid rgba(157, 149, 135, 0.38);
+  background: rgba(16, 14, 20, 0.88);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.node__inner {
+  width: 38%;
+  height: 38%;
+  border-radius: 50%;
+  background: rgba(157, 149, 135, 0.25);
+  transition: background 180ms ease, box-shadow 180ms ease;
+  pointer-events: none;
+}
+
+.node--active {
+  border-color: var(--gold);
+  background: rgba(198, 166, 103, 0.1);
+  box-shadow: 0 0 14px rgba(198, 166, 103, 0.5), inset 0 0 10px rgba(198, 166, 103, 0.18);
+}
+
+.node--active .node__inner {
+  background: var(--gold-bright);
+  box-shadow: 0 0 10px rgba(232, 210, 159, 0.85), 0 0 20px rgba(198, 166, 103, 0.5);
+}
+
+.node--preview {
+  border-color: rgba(198, 166, 103, 0.55);
+  border-style: dashed;
+  box-shadow: 0 0 10px rgba(198, 166, 103, 0.22);
+}
+
+.node--preview .node__inner {
+  background: rgba(198, 166, 103, 0.35);
+}
+
+.node--selected {
+  border-color: var(--gold-bright);
+  border-style: solid;
+  background: rgba(198, 166, 103, 0.14);
+  box-shadow: 0 0 22px rgba(232, 210, 159, 0.65), inset 0 0 12px rgba(198, 166, 103, 0.3);
+}
+
+.node--selected .node__inner {
+  background: var(--gold-bright);
+  box-shadow: 0 0 12px rgba(232, 210, 159, 0.95);
+}
+
+@keyframes node-flash {
+  0%   { box-shadow: 0 0 6px rgba(198,166,103,0.2), inset 0 0 4px rgba(198,166,103,0.1); }
+  30%  { box-shadow: 0 0 36px rgba(232,210,159,0.9), 0 0 60px rgba(198,166,103,0.5), inset 0 0 18px rgba(198,166,103,0.4); }
+  100% { box-shadow: 0 0 14px rgba(198,166,103,0.4), inset 0 0 8px rgba(198,166,103,0.15); }
+}
+
+.node--flash {
+  animation: node-flash 0.38s ease forwards;
+}
+
+@media (max-width: 640px) {
+  .puzzle-hud {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .puzzle-counters {
+    flex: 1;
+  }
+
+  .puzzle-actions {
+    flex: 1 1 100%;
+  }
+
+  .puzzle-actions .btn {
+    flex: 1;
+  }
+}
