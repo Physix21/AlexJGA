@@ -24,7 +24,11 @@ const failMessages = [
   "Der Stein schweigt. Dein Phallus bleibt im Dunkel verborgen.",
   "Die Runen knistern: Noch trägt deine Hand nicht das Gewicht eines wahrhaftigen Phallus.",
   "Ein kalter Hauch: Der Kreis murmelnd, du seist eher Wanderer als Träger des Phallus.",
-  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein."
+  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein.",
+  "Das Orakel schweigt – nicht aus Ehrerbietung, sondern aus Mitleid. Kein Phallus strahlt dir entgegen.",
+  "Die Sterne verdrehen sich schamvoll. Kein Siegel des Phallus brennt in deiner Wahl.",
+  "Ein Raunen geht durch den alten Bund: Dieser Erwählte trägt kein Mal des Phallus bei sich.",
+  "Die Wächter wenden sich ab. Dein Zeichen verblasst – der wahre Phallus bleibt dir verborgen."
 ];
 
 function updateAttemptDisplay() {
@@ -161,7 +165,7 @@ function handleSubmit() {
   playAudio();
   attempts += 1;
 
-  if (attempts < 5) {
+  if (attempts < 9) {
     const message = failMessages[attempts - 1] || failMessages[failMessages.length - 1];
     feedback.textContent = message;
     feedback.className = "feedback error";
