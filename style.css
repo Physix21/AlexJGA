@@ -248,6 +248,25 @@ h2 {
   opacity: 1;
 }
 
+.tile:disabled {
+  color: var(--muted);
+  border-color: rgba(157, 149, 135, 0.2);
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.tile:disabled:hover {
+  transform: none;
+  border-color: rgba(157, 149, 135, 0.2);
+  box-shadow: none;
+}
+
+.tile:disabled:active {
+  transform: none;
+}
+
 .rune {
   text-shadow: 0 0 14px rgba(198, 166, 103, 0.4);
 }
