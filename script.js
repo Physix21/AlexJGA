@@ -5,6 +5,7 @@ const audio = document.getElementById("bg-audio");
 const forbiddenBtn = document.getElementById("forbidden-btn");
 const vizCanvas = document.getElementById("viz");
 const vizCtx = vizCanvas ? vizCanvas.getContext("2d") : null;
+const victoryOverlay = document.getElementById("victory-overlay");
 
 const pages = document.querySelectorAll(".page");
 const introPageId = "page-intro";
@@ -13,17 +14,17 @@ const coordsPageId = "page-coords";
 
 let attempts = 0;
 let audioStarted = false;
-const baseFeedback = "Tippe die Kacheln und starte die Prüfung.";
+const baseFeedback = "Lege deine Wahl offen. Das Urteil fällt sofort.";
 let audioCtx = null;
 let analyser = null;
 let dataArray = null;
 let bufferLength = 0;
 
 const failMessages = [
-  "Der Stein schweigt. Vielleicht bist du nur ein Wanderer, kein Erwählter.",
-  "Die Runen flackern und lachen leise. Noch fehlt dir der Glanz, Alex.",
-  "Ein kalter Wind: Die Alte weiß sagt, du seist eher Touri als Erlöser.",
-  "Die Flamme hustet kurz und erlischt. Scheinbar war das nichts, Auserkorener?"
+  "Der Stein schweigt. Dein Phallus bleibt im Dunkel verborgen.",
+  "Die Runen knistern: Noch trägt deine Hand nicht das Gewicht eines wahrhaftigen Phallus.",
+  "Ein kalter Hauch: Der Kreis murmelnd, du seist eher Wanderer als Träger des Phallus.",
+  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein."
 ];
 
 function updateAttemptDisplay() {
@@ -166,10 +167,24 @@ function handleSubmit() {
     grid.classList.add("shake");
     setTimeout(() => grid.classList.remove("shake"), 260);
   } else {
-    feedback.textContent = "Die Flamme erkennt dich. Die Prüfung ist bestanden.";
+    feedback.textContent = "Die Altvorderen nicken. Dein Zeichen wurde erkannt.";
     feedback.className = "feedback success";
-    showPage(coordsPageId);
+    triggerVictory();
   }
+}
+
+function triggerVictory() {
+  if (!victoryOverlay) {
+    showPage(coordsPageId);
+    return;
+  }
+  victoryOverlay.classList.remove("hidden");
+  requestAnimationFrame(() => victoryOverlay.classList.add("active"));
+  setTimeout(() => {
+    victoryOverlay.classList.remove("active");
+    victoryOverlay.classList.add("hidden");
+    showPage(coordsPageId);
+  }, 4000);
 }
 
 function startTrial() {

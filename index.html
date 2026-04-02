@@ -21,14 +21,11 @@
     <section class="page page--active" id="page-intro" data-page="intro">
       <header class="hero">
         <div class="hero__content">
-          <p class="eyebrow">Seite 1 · Ruf zur Prüfung</p>
           <h1>Prüfung des Auserwählten</h1>
           <p class="lede">
-            Alex, der Ruf hallt durch die Schatten. Tritt vor, lege deine Würdigkeit offen
-            und bestehe die kleine Probe, die die Altvorderen so amüsant fanden.
+            An Alex, den Auserwählten: Die Schatten wachsen, das Licht der alten Ordnung flackert. Nur dein Zeichen blieb. Tritt vor, lege deine Würdigkeit offen – erst die Prüfung, dann der Weg.
           </p>
-          <button id="start-btn" class="btn primary">Prüfung beginnen</button>
-          <p class="hint">Hinweis: Musik startet nach deiner Berührung und läuft durch alle Seiten.</p>
+          <button id="start-btn" class="btn primary">Führe mich</button>
         </div>
       </header>
     </section>
@@ -39,14 +36,17 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <p class="eyebrow">Seite 2 · CAPTCHA der Flammen</p>
-              <h2>Wähle das edle Zeichen</h2>
-              <p class="lede">Aus 50 fernöstlichen Glyphen sollst du das Zeichen für den edlen Phallus erkennen.</p>
+              <h2>Nur ein Zeichen steht stramm und starr</h2>
+              <p class="lede">Aus diesen antiken Glyphen soll nur eines das Siegel des edlen Phallus abbilden. Erweise dich, Erwählter, oder weiche zurück. Vertraue auf dein Inneres und lass dein Heiz das wahre Siegel wählen.</p>
             </div>
           </div>
 
+          <div id="feedback" class="feedback" role="status" aria-live="polite">
+            Nur zu. Entscheide dich im Namen des Phallus. Das Urteil folgt unverzüglich.
+          </div>
+
           <div class="grid" id="tile-grid">
-            <!-- 50 over-the-top glyph tiles -->
+            <!-- 49 over-the-top glyph tiles -->
             <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">龙</span></button>
             <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">凤</span></button>
             <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">山</span></button>
@@ -98,9 +98,6 @@
             <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">凰</span></button>
           </div>
 
-          <div id="feedback" class="feedback" role="status" aria-live="polite">
-            Tippe die Kacheln und starte die Prüfung.
-          </div>
         </div>
       </div>
     </section>
@@ -108,34 +105,43 @@
     <!-- Seite 3 -->
     <section class="page" id="page-coords" data-page="coords">
       <div class="card success">
-        <p class="eyebrow">Seite 3 · Anerkannt</p>
         <h2>Würdiger Pfad freigelegt</h2>
         <p class="lede">
-          Die Schatten weichen, der Zirkel verneigt sich. Alex, du bist erwählt.
-          Begebe dich zum nächsten Schauplatz – die Flammen warten.
+          Die Schatten weichen, die Schwüre erneuern sich. Alex, du hast bestanden. Begebe dich zum ersten Schauplatz – die Flammen warten.
         </p>
         <div class="coords">
           <span class="coords__label">Koordinaten des Rufes</span>
           <span class="coords__value">51.072043, 13.756919</span>
         </div>
         <p class="closing">
-          Der Ring hat gesprochen. Schreite ohne Zögern.
+          
         </p>
 
         <div class="warning">
-          <p class="warning__title">Berühre diesen Knopf nicht.</p>
+          <p class="warning__title">WAGE ES NICHT.</p>
           <p class="warning__text">
-            Die Altvorderen warnen: Wer diesen Schalter drückt, sieht Dinge, die nicht
-            un-gesehen werden können. Lass ihn in Ruhe.
+            Die Altvorderen warnen inständig. Wer diesen Schalter betätigt, sieht Dinge, die nicht
+            für diese Welt bestimmt sind und nie wieder ungesehen gemacht werden können. Lass ihn in Ruhe.
           </p>
-          <button id="forbidden-btn" class="btn danger">Nicht drücken</button>
+          <button id="forbidden-btn" class="btn danger">HALTE DICH FERN</button>
         </div>
       </div>
     </section>
   </main>
 
+  <div id="victory-overlay" class="victory hidden" aria-hidden="true">
+    <div class="victory__orb">
+      <div class="victory__ring"></div>
+      <div class="victory__ring victory__ring--inner"></div>
+    </div>
+    <div class="victory__text">
+      <div class="victory__title">Würdigkeit bestätigt</div>
+      <div class="victory__subtitle">Die Flammen neigen sich.</div>
+    </div>
+  </div>
+
   <footer class="footer">
-    <span>Für Alex · Keine echte Hürde · Nur Stil</span>
+    <span>Für Alex, den wahren Nachfolger Luthers</span>
   </footer>
 
   <script src="script.js"></script>

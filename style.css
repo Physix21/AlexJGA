@@ -207,7 +207,7 @@ h2 {
   margin: 1.2rem 0 0.8rem;
   display: grid;
   gap: 0.65rem;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .tile {
@@ -385,6 +385,85 @@ h2 {
   text-align: center;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.victory {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
+  background: radial-gradient(80% 80% at 50% 50%, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.88));
+  backdrop-filter: blur(8px);
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+.victory.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.victory__orb {
+  position: relative;
+  width: min(280px, 60vw);
+  height: min(280px, 60vw);
+  display: grid;
+  place-items: center;
+  animation: victory-pop 1.8s ease forwards;
+}
+
+.victory__ring,
+.victory__ring--inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 214, 160, 0.5);
+  box-shadow: 0 0 35px rgba(255, 214, 160, 0.35), inset 0 0 25px rgba(198, 166, 103, 0.35);
+  mix-blend-mode: screen;
+  animation: victory-glow 1.6s ease-in-out infinite;
+}
+
+.victory__ring--inner {
+  inset: 18%;
+  border-width: 3px;
+  animation-duration: 1.6s;
+  animation-direction: reverse;
+}
+
+.victory__text {
+  text-align: center;
+}
+
+.victory__title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+
+.victory__subtitle {
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes victory-pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  35% { transform: scale(1.06); opacity: 1; }
+  65% { transform: scale(0.98); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes victory-glow {
+  0% { opacity: 0.55; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.65; transform: scale(0.97); }
 }
 
 @keyframes drift {
