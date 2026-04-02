@@ -143,6 +143,89 @@ function showPage(pageId) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// LoL-style metallic selection sound synthesised via Web Audio API
+function playSelectSound() {
+  if (!audioCtx) {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (_) { return; }
+  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
+  const now = audioCtx.currentTime;
+
+  // Primary metallic body tone – sweeps down like a struck cymbal
+  const osc = audioCtx.createOscillator();
+  const oscGain = audioCtx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(820, now);
+  osc.frequency.exponentialRampToValueAtTime(380, now + 0.2);
+  oscGain.gain.setValueAtTime(0, now);
+  oscGain.gain.linearRampToValueAtTime(0.38, now + 0.008);
+  oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+  osc.connect(oscGain);
+  oscGain.connect(audioCtx.destination);
+  osc.start(now);
+  osc.stop(now + 0.24);
+
+  // Upper harmonic shimmer
+  const osc2 = audioCtx.createOscillator();
+  const osc2Gain = audioCtx.createGain();
+  osc2.type = "triangle";
+  osc2.frequency.setValueAtTime(1640, now);
+  osc2.frequency.exponentialRampToValueAtTime(980, now + 0.1);
+  osc2Gain.gain.setValueAtTime(0, now);
+  osc2Gain.gain.linearRampToValueAtTime(0.14, now + 0.006);
+  osc2Gain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+  osc2.connect(osc2Gain);
+  osc2Gain.connect(audioCtx.destination);
+  osc2.start(now);
+  osc2.stop(now + 0.13);
+
+  // Sharp transient noise burst (the "click" impact)
+  const impactLen = Math.ceil(audioCtx.sampleRate * 0.04);
+  const impactBuf = audioCtx.createBuffer(1, impactLen, audioCtx.sampleRate);
+  const impactData = impactBuf.getChannelData(0);
+  for (let i = 0; i < impactLen; i++) {
+    impactData[i] = (Math.random() * 2 - 1) * (1 - i / impactLen);
+  }
+  const impactSrc = audioCtx.createBufferSource();
+  impactSrc.buffer = impactBuf;
+  const impactFilter = audioCtx.createBiquadFilter();
+  impactFilter.type = "highpass";
+  impactFilter.frequency.value = 2200;
+  const impactGain = audioCtx.createGain();
+  impactGain.gain.setValueAtTime(0.22, now);
+  impactGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+  impactSrc.connect(impactFilter);
+  impactFilter.connect(impactGain);
+  impactGain.connect(audioCtx.destination);
+  impactSrc.start(now);
+}
+
+// Soft synthesised chime for victory/success
+function playVictorySound() {
+  if (!audioCtx) return;
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
+  const now = audioCtx.currentTime;
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
+  notes.forEach((freq, i) => {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = "sine";
+    o.frequency.value = freq;
+    const t = now + i * 0.14;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.28, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+    o.connect(g);
+    g.connect(audioCtx.destination);
+    o.start(t);
+    o.stop(t + 0.7);
+  });
+}
+
 function toggleTile(e) {
   const tile = e.currentTarget;
   const pressed = tile.getAttribute("aria-pressed") === "true";
@@ -179,6 +262,7 @@ function handleSubmit() {
 }
 
 function triggerVictory() {
+  playVictorySound();
   if (!victoryOverlay) {
     showPage(coordsPageId);
     return;
@@ -202,6 +286,9 @@ startBtn.addEventListener("click", startTrial);
 [...grid.children].forEach((tile) =>
   tile.addEventListener("click", (e) => {
     kickstartAudio();
+    playSelectSound();
+    tile.classList.add("tile--flash");
+    setTimeout(() => tile.classList.remove("tile--flash"), 380);
     toggleTile(e);
     handleSubmit();
     tile.disabled = true;
