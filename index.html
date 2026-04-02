@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prüfung des Auserwählten</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background">
+    <div class="fog fog-1"></div>
+    <div class="fog fog-2"></div>
+    <div class="grain"></div>
+  </div>
+  <canvas id="viz" class="viz" aria-hidden="true"></canvas>
+
+  <audio id="bg-audio" src="musik.mp3" preload="auto" loop playsinline></audio>
+
+  <main class="shell">
+    <!-- Seite 1 -->
+    <section class="page page--active" id="page-intro" data-page="intro">
+      <header class="hero">
+        <div class="hero__content">
+          <p class="eyebrow">Seite 1 · Ruf zur Prüfung</p>
+          <h1>Prüfung des Auserwählten</h1>
+          <p class="lede">
+            Alex, der Ruf hallt durch die Schatten. Tritt vor, lege deine Würdigkeit offen
+            und bestehe die kleine Probe, die die Altvorderen so amüsant fanden.
+          </p>
+          <button id="start-btn" class="btn primary">Prüfung beginnen</button>
+          <p class="hint">Hinweis: Musik startet nach deiner Berührung und läuft durch alle Seiten.</p>
+        </div>
+      </header>
+    </section>
+
+    <!-- Seite 2 -->
+    <section class="page" id="page-captcha" data-page="captcha">
+      <div class="trial" id="trial">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <p class="eyebrow">Seite 2 · CAPTCHA der Flammen</p>
+              <h2>Wähle das edle Zeichen</h2>
+              <p class="lede">Aus 50 fernöstlichen Glyphen sollst du das Zeichen für den edlen Phallus erkennen.</p>
+            </div>
+          </div>
+
+          <div class="grid" id="tile-grid">
+            <!-- 50 over-the-top glyph tiles -->
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">龙</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">凤</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">山</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">水</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">火</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">风</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">雷</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">云</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">木</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">金</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">土</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">空</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">雪</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">霜</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">雾</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">星</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">月</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">日</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">夜</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">剑</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">盾</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">魂</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">血</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">骨</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">影</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">光</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">冥</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">幽</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">玄</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">苍</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">荒</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">渊</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">陵</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">禁</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">罪</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">祭</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">泪</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">灭</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">灭</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">铃</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">铃</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">秘</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">符</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">界</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">虚</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">幻</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">梦</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">魇</span></button>
+            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">凰</span></button>
+          </div>
+
+          <div id="feedback" class="feedback" role="status" aria-live="polite">
+            Tippe die Kacheln und starte die Prüfung.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seite 3 -->
+    <section class="page" id="page-coords" data-page="coords">
+      <div class="card success">
+        <p class="eyebrow">Seite 3 · Anerkannt</p>
+        <h2>Würdiger Pfad freigelegt</h2>
+        <p class="lede">
+          Die Schatten weichen, der Zirkel verneigt sich. Alex, du bist erwählt.
+          Begebe dich zum nächsten Schauplatz – die Flammen warten.
+        </p>
+        <div class="coords">
+          <span class="coords__label">Koordinaten des Rufes</span>
+          <span class="coords__value">51.072043, 13.756919</span>
+        </div>
+        <p class="closing">
+          Der Ring hat gesprochen. Schreite ohne Zögern.
+        </p>
+
+        <div class="warning">
+          <p class="warning__title">Berühre diesen Knopf nicht.</p>
+          <p class="warning__text">
+            Die Altvorderen warnen: Wer diesen Schalter drückt, sieht Dinge, die nicht
+            un-gesehen werden können. Lass ihn in Ruhe.
+          </p>
+          <button id="forbidden-btn" class="btn danger">Nicht drücken</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Für Alex · Keine echte Hürde · Nur Stil</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
