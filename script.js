@@ -232,30 +232,35 @@ let failMessageIndex = 0;
 
 // ===== SIGILLATIONSKREIS PUZZLE =====
 
-const PUZZLE_NUM_NODES = 16;
-const PUZZLE_GOAL = (1 << 16) - 1; // all 16 nodes active
+const PUZZLE_NUM_NODES = 20;
+const PUZZLE_GOAL = (1 << 20) - 1; // all 20 nodes active
 
 // Adjacency list for each node
 // Ring cycle (0-11): i <-> (i+1)%12
 // Inner cycle: 12-13-14-15-12
 // Spokes: 0-12, 3-13, 6-14, 9-15
+// Leaf antennae: 1-16, 4-17, 7-18, 10-19 (open dead-end nodes)
 const PUZZLE_ADJ = [
-  [1, 11, 12],  // 0: ring + spoke to inner-top
-  [0, 2],       // 1: ring only
-  [1, 3],       // 2: ring only
-  [2, 4, 13],   // 3: ring + spoke to inner-right
-  [3, 5],       // 4: ring only
-  [4, 6],       // 5: ring only
-  [5, 7, 14],   // 6: ring + spoke to inner-bottom
-  [6, 8],       // 7: ring only
-  [7, 9],       // 8: ring only
-  [8, 10, 15],  // 9: ring + spoke to inner-left
-  [9, 11],      // 10: ring only
-  [10, 0],      // 11: ring only
-  [0, 13, 15],  // 12: inner-top (inner cycle + spoke from 0)
-  [3, 12, 14],  // 13: inner-right (inner cycle + spoke from 3)
-  [6, 13, 15],  // 14: inner-bottom (inner cycle + spoke from 6)
-  [9, 14, 12],  // 15: inner-left (inner cycle + spoke from 9)
+  [1, 11, 12],      // 0: ring + spoke to inner-top
+  [0, 2, 16],       // 1: ring + leaf 16
+  [1, 3],           // 2: ring only
+  [2, 4, 13],       // 3: ring + spoke to inner-right
+  [3, 5, 17],       // 4: ring + leaf 17
+  [4, 6],           // 5: ring only
+  [5, 7, 14],       // 6: ring + spoke to inner-bottom
+  [6, 8, 18],       // 7: ring + leaf 18
+  [7, 9],           // 8: ring only
+  [8, 10, 15],      // 9: ring + spoke to inner-left
+  [9, 11, 19],      // 10: ring + leaf 19
+  [10, 0],          // 11: ring only
+  [0, 13, 15],      // 12: inner-top (inner cycle + spoke from 0)
+  [3, 12, 14],      // 13: inner-right (inner cycle + spoke from 3)
+  [6, 13, 15],      // 14: inner-bottom (inner cycle + spoke from 6)
+  [9, 14, 12],      // 15: inner-left (inner cycle + spoke from 9)
+  [1],              // 16: leaf antenna from 1 (open end)
+  [4],              // 17: leaf antenna from 4 (open end)
+  [7],              // 18: leaf antenna from 7 (open end)
+  [10],             // 19: leaf antenna from 10 (open end)
 ];
 
 // moveMask[v] = bitmask of v + all direct neighbours
@@ -282,14 +287,16 @@ const PUZZLE_EDGES = (function () {
 })();
 
 // Fixed start state: nodes 0 and 6 active (rest passive)
-// BFS distance from this state to GOAL = 8 (verified offline)
+// BFS distance from this state to GOAL = 10 (with 20 nodes including 4 leaf antennae)
 const PUZZLE_START = 0x0041;
 
 // Node positions as [x%, y%] on the board (0-100 scale)
 // Outer ring: 12 nodes on a circle, starting at top (node 0), clockwise
 // Inner rhombus: 4 nodes aligned with the 4 spokes
+// Leaf antennae: 4 nodes (16-19) extended outward from ring nodes 1, 4, 7, 10
 const PUZZLE_NODE_POS = (function () {
   const OR = 40; // outer ring radius (% of board)
+  const LR = 50; // leaf antenna radius (% of board) – further out than ring
   const IR = 20; // inner rhombus radius (% of board)
   const CX = 50, CY = 50; // center (%)
   const pos = [];
@@ -301,6 +308,12 @@ const PUZZLE_NODE_POS = (function () {
   pos.push([CX + IR, CY     ]); // 13: inner-right (spoke from 3)
   pos.push([CX,      CY + IR]); // 14: inner-bottom (spoke from 6)
   pos.push([CX - IR, CY     ]); // 15: inner-left (spoke from 9)
+  // Leaf antennae: same angle as parent ring node, pushed outward to LR
+  const leafParentIndices = [1, 4, 7, 10];
+  for (const p of leafParentIndices) {
+    const angle = -Math.PI / 2 + p * (Math.PI / 6);
+    pos.push([CX + LR * Math.cos(angle), CY + LR * Math.sin(angle)]);
+  }
   return pos;
 })();
 
@@ -316,7 +329,7 @@ let puzzleCachedForesight = -1; // cached BFS result, -1 = not yet computed
 // BFS from startState to GOAL (early exit when goal found)
 function puzzleComputeForesight(startState) {
   if (startState === PUZZLE_GOAL) return 0;
-  const dist = new Uint16Array(1 << 16).fill(0xFFFF);
+  const dist = new Uint16Array(1 << 20).fill(0xFFFF);
   dist[startState] = 0;
   const q = [startState];
   let head = 0;
