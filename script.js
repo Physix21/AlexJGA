@@ -8,8 +8,14 @@ const victoryOverlay = document.getElementById("victory-overlay");
 const confirmSfx = document.getElementById("confirm-sfx");
 const navSfx = document.getElementById("nav-sfx");
 const revealSfx = document.getElementById("reveal-sfx");
+const gateForm = document.getElementById("gate-form");
+const gateInput = document.getElementById("gate-input");
+const gateBtn = document.getElementById("gate-btn");
+const gateCard = document.getElementById("gate-card");
+const forbiddenOverlay = document.getElementById("bait-overlay");
 
 const pages = document.querySelectorAll(".page");
+const verifyPageId = "page-verify";
 const introPageId = "page-intro";
 const captchaPageId = "page-captcha";
 const coordsPageId = "page-coords";
@@ -19,6 +25,10 @@ let audioCtx = null;
 let analyser = null;
 let dataArray = null;
 let bufferLength = 0;
+let gateUnlocked = false;
+let baitPulseTimer = null;
+
+const GATE_ACCEPTED = ["alexander luther", "alex luther"];
 
 function updateFeedback(text, variant = "") {
   if (!feedback) return;
@@ -119,7 +129,9 @@ function drawVisualizer() {
   const avg =
     dataArray.reduce((sum, v) => sum + v, 0) / Math.max(1, dataArray.length) / 255;
   const pulse = Math.min(1, Math.max(0, (avg - 0.08) * 2.2));
+  const pulseStrong = Math.min(1, pulse * 1.6 + 0.12);
   document.documentElement.style.setProperty("--pulse", pulse.toFixed(3));
+  document.documentElement.style.setProperty("--pulse-strong", pulseStrong.toFixed(3));
 
   for (let i = 0; i < bars; i++) {
     const val = dataArray[i * step] / 255;
@@ -155,6 +167,42 @@ function showPage(pageId) {
     page.classList.toggle("page--active", isActive);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
+  if (pageId === coordsPageId) {
+    startBaitPulse();
+  } else {
+    stopBaitPulse();
+    hideBaitOverlay();
+  }
+}
+
+function normaliseName(value = "") {
+  return value
+    .toLowerCase()
+    .replace(/[^a-zäöüß\s-]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function validateGate() {
+  if (!gateInput || !gateBtn) return false;
+  const name = normaliseName(gateInput.value);
+  const valid = GATE_ACCEPTED.includes(name);
+  gateBtn.disabled = !valid;
+  return valid;
+}
+
+function failGate() {
+  if (gateCard) {
+    gateCard.classList.add("shake");
+    setTimeout(() => gateCard.classList.remove("shake"), 320);
+  }
+}
+
+function unlockGate() {
+  gateUnlocked = true;
+  playConfirmSound();
+  kickstartAudio();
+  setTimeout(() => showPage(introPageId), 200);
 }
 
 // LoL-style metallic selection sound synthesised via Web Audio API
@@ -580,6 +628,10 @@ function puzzleInit() {
 }
 
 function startTrial() {
+  if (!gateUnlocked) {
+    showPage(verifyPageId);
+    return;
+  }
   kickstartAudio();
   puzzleInit();
   showPage(captchaPageId);
@@ -587,6 +639,23 @@ function startTrial() {
 
 // Wire up start button
 startBtn.addEventListener("click", startTrial);
+
+// Wire up gate form
+if (gateInput) {
+  gateInput.addEventListener("input", validateGate);
+}
+
+if (gateForm) {
+  gateForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ok = validateGate();
+    if (!ok) {
+      failGate();
+      return;
+    }
+    unlockGate();
+  });
+}
 
 // Wire up undo/reset buttons
 document.addEventListener("DOMContentLoaded", () => {
@@ -614,6 +683,7 @@ window.addEventListener("load", () => {
   const hudForesight = document.getElementById("hud-foresight");
   if (hudForesight) hudForesight.textContent = puzzleCachedForesight;
   puzzleRender();
+  if (gateInput) gateInput.focus();
 });
 
 ["pointerdown", "touchstart", "keydown", "click"].forEach((evt) => {
@@ -632,7 +702,44 @@ document.addEventListener("click", (e) => {
 });
 
 if (forbiddenBtn) {
-  forbiddenBtn.addEventListener("click", () => {
-    window.open("https://www.meatspin.com", "_blank", "noopener");
+  forbiddenBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    kickstartAudio();
+    playRevealSound();
+    showBaitOverlay();
+    setTimeout(() => {
+      hideBaitOverlay();
+      window.open("https://www.meatspin.com", "_blank", "noopener");
+    }, 1500);
   });
+}
+
+function showBaitOverlay() {
+  if (!forbiddenOverlay) return;
+  forbiddenOverlay.classList.remove("hidden");
+  forbiddenOverlay.setAttribute("aria-hidden", "false");
+}
+
+function hideBaitOverlay() {
+  if (!forbiddenOverlay) return;
+  forbiddenOverlay.classList.add("hidden");
+  forbiddenOverlay.setAttribute("aria-hidden", "true");
+}
+
+function startBaitPulse() {
+  if (!forbiddenBtn) return;
+  stopBaitPulse();
+  forbiddenBtn.classList.add("danger-pulse");
+  baitPulseTimer = setInterval(() => {
+    forbiddenBtn.classList.toggle("danger-pulse");
+    setTimeout(() => forbiddenBtn.classList.add("danger-pulse"), 900);
+  }, 3600);
+}
+
+function stopBaitPulse() {
+  if (baitPulseTimer) {
+    clearInterval(baitPulseTimer);
+    baitPulseTimer = null;
+  }
+  if (forbiddenBtn) forbiddenBtn.classList.remove("danger-pulse");
 }

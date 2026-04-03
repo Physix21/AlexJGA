@@ -20,8 +20,32 @@
   <audio id="reveal-sfx" src="reveal.mp3" preload="auto"></audio>
 
   <main class="shell">
+    <!-- Vorsiegel / Presite -->
+    <section class="page page--active" id="page-verify" data-page="verify">
+      <header class="hero">
+        <div class="hero__content gate-card" id="gate-card">
+          <p class="eyebrow">Vorsiegel der Gilde</p>
+          <h1>Wahrheit vor Eintritt</h1>
+          <p class="lede lede--drop">
+            Vor der Schwelle wird kein Schatten geduldet. Nur Alexander Luther darf den Kreis betreten. Sprich deinen Namen, und das Vorsiegel entscheidet.
+          </p>
+
+          <form id="gate-form" class="gate__form" autocomplete="off">
+            <label class="input">
+              <span class="input__label">Nenne deinen wahren Namen</span>
+              <input id="gate-input" type="text" name="name" placeholder="Name" spellcheck="false" autocomplete="name" />
+              <span class="input__hint">Nur der echte Name entzündet das Vorsiegel.</span>
+            </label>
+            <div class="gate__actions">
+              <button id="gate-btn" class="btn primary" type="submit" disabled data-nav-sound="next-page">EINKEHREN</button>
+            </div>
+          </form>
+        </div>
+      </header>
+    </section>
+
     <!-- Seite 1 -->
-    <section class="page page--active" id="page-intro" data-page="intro">
+    <section class="page" id="page-intro" data-page="intro">
       <header class="hero">
         <div class="hero__content">
           <h1>Brief der Gilde</h1>
@@ -39,9 +63,8 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <h2>Sigillationskreis</h2>
-              <p class="lede">Vor dir liegt der Sigillationskreis der Gilde: sechzehn Knoten, zwei erwacht. Ein erster Griff offenbart die Reichweite, ein zweiter bindet das Muster. Nur wer alle entzündet, erhält Eintritt in die Rituale dahinter – Schmieden der Klinge, Tragen der Letzten Flamme, Schwur gegen den Dämon.</p>
-              <p class="hint">Ohne deinen Erfolg bleibt die Welt dem Riss ausgeliefert. Jeder Zug ist ein Schlag gegen die Finsternis.</p>
+              <h2>Die Siegel der Unbeugsamen</h2>
+              <p class="lede">Nur wer alle Siegel entzündet, kann wahrhaftig der Auserwählte sein.</p>
             </div>
             <div class="puzzle-hud">
               <div class="puzzle-counters">
@@ -107,6 +130,14 @@
     <div class="victory__text">
       <div class="victory__title">Würdigkeit bestätigt</div>
       <div class="victory__subtitle">Die Flammen neigen sich.</div>
+    </div>
+  </div>
+
+  <div id="bait-overlay" class="bait hidden" aria-hidden="true">
+    <div class="bait__veil">
+      <div class="bait__title">Illusionsvorhang</div>
+      <div class="bait__subtitle">Manche Türen sollen geschlossen bleiben.</div>
+      <div class="bait__spinner"></div>
     </div>
   </div>
 
