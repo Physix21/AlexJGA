@@ -5,6 +5,9 @@ const forbiddenBtn = document.getElementById("forbidden-btn");
 const vizCanvas = document.getElementById("viz");
 const vizCtx = vizCanvas ? vizCanvas.getContext("2d") : null;
 const victoryOverlay = document.getElementById("victory-overlay");
+const confirmSfx = document.getElementById("confirm-sfx");
+const navSfx = document.getElementById("nav-sfx");
+const revealSfx = document.getElementById("reveal-sfx");
 
 const pages = document.querySelectorAll(".page");
 const introPageId = "page-intro";
@@ -16,6 +19,16 @@ let audioCtx = null;
 let analyser = null;
 let dataArray = null;
 let bufferLength = 0;
+
+function updateFeedback(text, variant = "") {
+  if (!feedback) return;
+  feedback.textContent = text;
+  feedback.className = "feedback";
+  if (variant) feedback.classList.add(variant);
+  feedback.classList.remove("feedback--pulse");
+  void feedback.offsetWidth; // restart animation
+  feedback.classList.add("feedback--pulse");
+}
 
 function playAudio() {
   if (audio && !audioStarted) {
@@ -41,6 +54,28 @@ function kickstartAudio() {
     audioCtx.resume();
   }
   playAudio();
+}
+
+function playSfx(el, volume = 1) {
+  if (!el) return;
+  try {
+    el.pause();
+    el.currentTime = 0;
+  } catch (_) { /* ignore */ }
+  el.volume = volume;
+  el.play().catch(() => {});
+}
+
+function playNavSound() {
+  playSfx(navSfx, 0.92);
+}
+
+function playConfirmSound() {
+  playSfx(confirmSfx, 0.92);
+}
+
+function playRevealSound() {
+  playSfx(revealSfx, 0.95);
 }
 
 function initVisualizer() {
@@ -203,9 +238,14 @@ function playVictorySound() {
 }
 
 function triggerVictory() {
-  playVictorySound();
+  playRevealSound();
+  const revealLen =
+    revealSfx && isFinite(revealSfx.duration) && revealSfx.duration > 0
+      ? revealSfx.duration * 1000
+      : 4200;
+
   if (!victoryOverlay) {
-    showPage(coordsPageId);
+    setTimeout(() => showPage(coordsPageId), revealLen);
     return;
   }
   victoryOverlay.classList.remove("hidden");
@@ -214,7 +254,7 @@ function triggerVictory() {
     victoryOverlay.classList.remove("active");
     victoryOverlay.classList.add("hidden");
     showPage(coordsPageId);
-  }, 4000);
+  }, revealLen);
 }
 
 // Failure messages from previous version, shown on unsuccessful moves
@@ -401,12 +441,12 @@ function puzzleNodeTap(v) {
   } else {
     // First tap or different node → set preview
     puzzlePreviewNode = v;
-    playSelectSound();
     puzzleRender();
   }
 }
 
 function puzzleExecuteMove(v) {
+  playConfirmSound();
   // Save for undo
   puzzleUndoStack.push({ state: puzzleState, moveCount: puzzleMoveCount });
   if (puzzleUndoStack.length > PUZZLE_MAX_UNDO) puzzleUndoStack.shift();
@@ -415,29 +455,22 @@ function puzzleExecuteMove(v) {
   puzzleState ^= PUZZLE_MOVE_MASK[v];
   puzzleMoveCount++;
 
-  playSelectSound();
   puzzleFlashNodes(PUZZLE_MOVE_MASK[v]);
   puzzleRender();
 
   if (puzzleState === PUZZLE_GOAL) {
     setTimeout(() => {
-      if (feedback) {
-        feedback.textContent = "Der Kreis ist geweiht. Weihe vollendet.";
-        feedback.className = "feedback success";
-      }
+      updateFeedback("Der Kreis ist geweiht. Weihe vollendet.", "success");
       triggerVictory();
     }, 320);
   } else {
-    if (feedback) {
-      const message = failMessages[failMessageIndex % failMessages.length];
-      failMessageIndex++;
-      feedback.textContent = message;
-      feedback.className = "feedback error";
-      const board = document.getElementById("graph-board");
-      if (board) {
-        board.classList.add("shake");
-        setTimeout(() => board.classList.remove("shake"), 260);
-      }
+    const message = failMessages[failMessageIndex % failMessages.length];
+    failMessageIndex++;
+    updateFeedback(message, "error");
+    const board = document.getElementById("graph-board");
+    if (board) {
+      board.classList.add("shake");
+      setTimeout(() => board.classList.remove("shake"), 260);
     }
   }
 }
@@ -499,10 +532,7 @@ function puzzleUndo() {
   puzzleState = state;
   puzzleMoveCount = moveCount;
   puzzlePreviewNode = -1;
-  if (feedback) {
-    feedback.textContent = "Das Siegel verblasst\u2026 Rückschritt vollzogen.";
-    feedback.className = "feedback";
-  }
+  updateFeedback("Das Siegel verblasst… Rückschritt vollzogen.");
   puzzleRender();
 }
 
@@ -512,11 +542,19 @@ function puzzleReset() {
   puzzleUndoStack = [];
   puzzlePreviewNode = -1;
   failMessageIndex = 0;
-  if (feedback) {
-    feedback.textContent = "Der Bund erwartet dich. Vollziehe den Ritus.";
-    feedback.className = "feedback";
-  }
+  updateFeedback("Die Gilde wartet. Entzünde den Kreis erneut.");
   puzzleRender();
+}
+
+function puzzleDevSolve() {
+  puzzleState = PUZZLE_GOAL;
+  puzzleMoveCount = 0;
+  puzzleUndoStack = [];
+  puzzlePreviewNode = -1;
+  puzzleFlashNodes(PUZZLE_GOAL);
+  puzzleRender();
+  updateFeedback("Dev: Kreis sofort geweiht.", "success");
+  setTimeout(triggerVictory, 180);
 }
 
 function puzzleInit() {
@@ -536,10 +574,7 @@ function puzzleInit() {
   const hudMoves = document.getElementById("hud-moves");
   if (hudMoves) hudMoves.textContent = 0;
 
-  if (feedback) {
-    feedback.textContent = "Der Bund erwartet dich. Vollziehe den Ritus.";
-    feedback.className = "feedback";
-  }
+  updateFeedback("Die Gilde erwartet den ersten Zug. Der Dämon lauert.");
 
   puzzleRender();
 }
@@ -589,6 +624,11 @@ window.addEventListener("load", () => {
     },
     { passive: true }
   );
+});
+
+document.addEventListener("click", (e) => {
+  const navBtn = e.target.closest("button[data-nav-sound]");
+  if (navBtn) playNavSound();
 });
 
 if (forbiddenBtn) {

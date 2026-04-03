@@ -15,17 +15,20 @@
   <canvas id="viz" class="viz" aria-hidden="true"></canvas>
 
   <audio id="bg-audio" src="musik.mp3" preload="auto" loop playsinline></audio>
+  <audio id="confirm-sfx" src="chooseelement.mp3" preload="auto"></audio>
+  <audio id="nav-sfx" src="buttonnextpage.mp3" preload="auto"></audio>
+  <audio id="reveal-sfx" src="reveal.mp3" preload="auto"></audio>
 
   <main class="shell">
     <!-- Seite 1 -->
     <section class="page page--active" id="page-intro" data-page="intro">
       <header class="hero">
         <div class="hero__content">
-          <h1>Prüfung des Auserwählten</h1>
-          <p class="lede">
-            An Alex, den Auserwählten: Die Schatten wachsen, das Licht der alten Ordnung flackert. Nur dein Zeichen blieb. Tritt vor, lege deine Würdigkeit offen – erst die Prüfung, dann der Weg.
+          <h1>Brief der Gilde</h1>
+          <p class="lede lede--drop">
+            Alex, der du den versiegelten Brief fandst: Dies ist die Eingangsschwelle der Gilde. Hinter dem Horizont reißt ein Dämon die Welt auf – nur wer den Sigillationskreis entzündet, darf in unsere Reihen treten und das Böse binden. Versage, und die Nacht frisst alles.
           </p>
-          <button id="start-btn" class="btn primary">Führe mich</button>
+          <button id="start-btn" class="btn primary" data-nav-sound="next-page">Prüfung beginnen</button>
         </div>
       </header>
     </section>
@@ -37,7 +40,8 @@
           <div class="card__header">
             <div>
               <h2>Sigillationskreis</h2>
-              <p class="lede">Ein altes Siegel erwacht. Weihe alle sechzehn Knoten des Kreises. Berühre einen Knoten zur Vorschau – berühre ihn erneut, um den Ritus zu vollziehen.</p>
+              <p class="lede">Vor dir liegt der Sigillationskreis der Gilde: sechzehn Knoten, zwei erwacht. Ein erster Griff offenbart die Reichweite, ein zweiter bindet das Muster. Nur wer alle entzündet, erhält Eintritt in die Rituale dahinter – Schmieden der Klinge, Tragen der Letzten Flamme, Schwur gegen den Dämon.</p>
+              <p class="hint">Ohne deinen Erfolg bleibt die Welt dem Riss ausgeliefert. Jeder Zug ist ein Schlag gegen die Finsternis.</p>
             </div>
             <div class="puzzle-hud">
               <div class="puzzle-counters">
@@ -51,14 +55,14 @@
                 </div>
               </div>
               <div class="puzzle-actions">
-                <button id="btn-undo" class="btn ghost" disabled>Rückgängig</button>
-                <button id="btn-reset" class="btn ghost">Neubeginn</button>
+                <button id="btn-undo" class="btn btn--primary-quiet" disabled>Rückgängig</button>
+                <button id="btn-reset" class="btn btn--muted" aria-label="Ritus neu beginnen">Neubeginn</button>
               </div>
             </div>
           </div>
 
           <div id="feedback" class="feedback" role="status" aria-live="polite">
-            Der Bund erwartet dich. Vollziehe den Ritus.
+            Die Gilde wartet auf deinen ersten Zug. Entzünde den Kreis, Alex.
           </div>
 
           <div class="graph-board" id="graph-board">
@@ -72,25 +76,24 @@
     <!-- Seite 3 -->
     <section class="page" id="page-coords" data-page="coords">
       <div class="card success">
-        <h2>Würdiger Pfad freigelegt</h2>
+        <h2>Einlass gewährt</h2>
         <p class="lede">
-          Die Schatten weichen, die Schwüre erneuern sich. Alex, du hast bestanden. Begebe dich zum ersten Schauplatz – die Flammen warten.
+          Der Kreis antwortete, die Gilde nickt. Alex, du hast die Schwelle überschritten. Trage diese Koordinaten zum Sammelpunkt der Erwählten, wo das nächste Ritual auf dich wartet.
         </p>
         <div class="coords">
           <span class="coords__label">Koordinaten des Rufes</span>
-          <span class="coords__value">51.072043, 13.756919</span>
+          <span class="coords__value" id="coords-value">51.072043, 13.756919</span>
         </div>
         <p class="closing">
           
         </p>
 
         <div class="warning">
-          <p class="warning__title">WAGE ES NICHT.</p>
+          <p class="warning__title">ZÜGEL DEINE HAND.</p>
           <p class="warning__text">
-            Die Altvorderen warnen inständig. Wer diesen Schalter betätigt, sieht Dinge, die nicht
-            für diese Welt bestimmt sind und nie wieder ungesehen gemacht werden können. Lass ihn in Ruhe.
+            Hinter diesem Siegel wartet Wissen, das selbst der Gilde verboten ist. Wer es öffnet, trägt die Bilder als Brandmal. Lass den Schalter ruhen, wenn dir dein Schlaf lieb ist.
           </p>
-          <button id="forbidden-btn" class="btn danger">HALTE DICH FERN</button>
+          <button id="forbidden-btn" class="btn danger">Berühre nicht</button>
         </div>
       </div>
     </section>
