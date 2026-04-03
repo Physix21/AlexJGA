@@ -36,26 +36,33 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <h2>Nur ein Zeichen steht stramm und starr</h2>
-              <p class="lede">Aus diesen antiken Glyphen soll nur eines das Siegel des edlen Phallus abbilden. Erweise dich, Erwählter, oder weiche zurück. Vertraue auf dein Inneres und lass dein Heiz das wahre Siegel wählen.</p>
+              <h2>Sigillationskreis</h2>
+              <p class="lede">Ein altes Siegel erwacht. Weihe alle sechzehn Knoten des Kreises. Berühre einen Knoten zur Vorschau – berühre ihn erneut, um den Ritus zu vollziehen.</p>
+            </div>
+            <div class="puzzle-hud">
+              <div class="puzzle-counters">
+                <div class="counter">
+                  <div class="counter__label">Vorsehung</div>
+                  <div id="hud-foresight" class="counter__value">—</div>
+                </div>
+                <div class="counter">
+                  <div class="counter__label">Ritus</div>
+                  <div id="hud-moves" class="counter__value">0</div>
+                </div>
+              </div>
+              <div class="puzzle-actions">
+                <button id="btn-undo" class="btn ghost" disabled>Rückgängig</button>
+                <button id="btn-reset" class="btn ghost">Neubeginn</button>
+              </div>
             </div>
           </div>
 
           <div id="feedback" class="feedback" role="status" aria-live="polite">
-            Nur zu. Entscheide dich im Namen des Phallus. Das Urteil folgt unverzüglich.
+            Der Bund erwartet dich. Vollziehe den Ritus.
           </div>
 
-          <div class="grid" id="tile-grid">
-            <!-- 9 glyph tiles in a 3x3 matrix -->
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">龙</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">凤</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">山</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">水</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">火</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">风</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">雷</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">云</span></button>
-            <button class="tile" data-correct="false" aria-pressed="false"><span class="rune">木</span></button>
+          <div class="graph-board" id="graph-board">
+            <!-- Nodes and edges are built by script.js -->
           </div>
 
         </div>
