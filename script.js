@@ -217,6 +217,19 @@ function triggerVictory() {
   }, 4000);
 }
 
+// Failure messages from previous version, shown on unsuccessful moves
+const failMessages = [
+  "Der Stein schweigt. Dein Phallus bleibt im Dunkel verborgen.",
+  "Die Runen knistern: Noch trägt deine Hand nicht das Gewicht eines wahrhaftigen Phallus.",
+  "Ein kalter Hauch: Der Kreis murmelnd, du seist eher Wanderer als Träger des Phallus.",
+  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein.",
+  "Das Orakel schweigt – nicht aus Ehrerbietung, sondern aus Mitleid. Kein Phallus strahlt dir entgegen.",
+  "Die Sterne verdrehen sich schamvoll. Kein Siegel des Phallus brennt in deiner Wahl.",
+  "Ein Raunen geht durch den alten Bund: Dieser Erwählte trägt kein Mal des Phallus bei sich.",
+  "Die Wächter wenden sich ab. Dein Zeichen verblasst – der wahre Phallus bleibt dir verborgen."
+];
+let failMessageIndex = 0;
+
 // ===== SIGILLATIONSKREIS PUZZLE =====
 
 const PUZZLE_NUM_NODES = 16;
@@ -416,8 +429,15 @@ function puzzleExecuteMove(v) {
     }, 320);
   } else {
     if (feedback) {
-      feedback.textContent = "Der Bund reagiert\u2026";
-      feedback.className = "feedback";
+      const message = failMessages[failMessageIndex % failMessages.length];
+      failMessageIndex++;
+      feedback.textContent = message;
+      feedback.className = "feedback error";
+      const board = document.getElementById("graph-board");
+      if (board) {
+        board.classList.add("shake");
+        setTimeout(() => board.classList.remove("shake"), 260);
+      }
     }
   }
 }
@@ -491,6 +511,7 @@ function puzzleReset() {
   puzzleMoveCount = 0;
   puzzleUndoStack = [];
   puzzlePreviewNode = -1;
+  failMessageIndex = 0;
   if (feedback) {
     feedback.textContent = "Der Bund erwartet dich. Vollziehe den Ritus.";
     feedback.className = "feedback";
@@ -504,6 +525,7 @@ function puzzleInit() {
   puzzleMoveCount = 0;
   puzzleUndoStack = [];
   puzzlePreviewNode = -1;
+  failMessageIndex = 0;
 
   // Use cached BFS foresight (computed once at first call)
   if (puzzleCachedForesight === -1) {
