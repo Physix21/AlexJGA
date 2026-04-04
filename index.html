@@ -112,12 +112,32 @@
         </p>
 
         <div class="warning">
-          <p class="warning__title">ZÜGEL DEINE HAND.</p>
+          <p class="warning__title">Tor der Versiegelten Kunde</p>
+          <button id="forbidden-btn" class="btn primary">Tor anrufen</button>
           <p class="warning__text">
-            Hinter diesem Siegel wartet Wissen, das selbst der Gilde verboten ist. Wer es öffnet, trägt die Bilder als Brandmal. Lass den Schalter ruhen, wenn dir dein Schlaf lieb ist.
+            Die Wache duldet nur den, dessen Name im Brief stand. Ein zweites Siegel stellt die Frage, bevor die verbotene Kunde sich zeigt.
           </p>
-          <button id="forbidden-btn" class="btn danger">Berühre nicht</button>
+          <div id="forbidden-reveal" class="warning__reveal hidden" role="status">
+            Du hast dich ausgewiesen, Alex. Die Wache senkt die Lanze – das Tor ist offen.
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Seite 4: Verbotene Kunde -->
+    <section class="page" id="page-forbidden" data-page="forbidden">
+      <div class="card success">
+        <h2>Verbotene Kunde</h2>
+        <p class="lede">
+          Die Wache wich, das zweite Siegel brach. Nur Alex hört diesen Schwur: Bewahre, was du nun siehst, als Flamme im Dunkel.
+        </p>
+        <div class="coords">
+          <span class="coords__label">Zeichen des Durchlasses</span>
+          <span class="coords__value">Sigillum Obscurum · Sanctum VIII</span>
+        </div>
+        <p class="closing">
+          Jenseits der Schwelle wartet das wahre Programm. Tritt hinaus – die Gilde folgt deinem Schritt.
+        </p>
       </div>
     </section>
   </main>
@@ -133,11 +153,39 @@
     </div>
   </div>
 
-  <div id="bait-overlay" class="bait hidden" aria-hidden="true">
-    <div class="bait__veil">
-      <div class="bait__title">Illusionsvorhang</div>
-      <div class="bait__subtitle">Manche Türen sollen geschlossen bleiben.</div>
-      <div class="bait__spinner"></div>
+  <div id="secret-gate" class="veil hidden" aria-hidden="true">
+    <div class="veil__panel">
+      <p class="eyebrow">Zweites Siegel</p>
+      <h3>Torfrage der Wache</h3>
+      <p class="veil__lede">
+        Welcher tapfere Geselle unterlag in den S4S BEGINNER.FINALS dem allmächtigen Physix am fünften Tage des Mai im Jahre 2024?
+      </p>
+      <form id="secret-form" class="veil__form" autocomplete="off">
+        <label class="input">
+          <span class="input__label">Sprich den Namen</span>
+          <input id="secret-answer" type="text" name="secret-answer" placeholder="Name des Gefallenen" spellcheck="false" autocomplete="off" required />
+        </label>
+        <p class="hint">Nur Alex kennt die Antwort. Ein falsches Wort – und die Wache bleibt stumm.</p>
+        <div class="veil__actions">
+          <button type="submit" class="btn primary">Siegel öffnen</button>
+          <button type="button" id="secret-cancel" class="btn btn--muted">Zurück</button>
+        </div>
+        <p id="secret-error" class="veil__error" role="alert"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="final-oath" class="veil hidden" aria-hidden="true">
+    <div class="veil__panel">
+      <p class="eyebrow">Letzte Rückversicherung</p>
+      <h3>Brandmal des Wissens</h3>
+      <p class="veil__lede oath__warning">
+        Was gleich offenbart wird, brennt sich in dein Gedächtnis. Kein Vergessen, kein Zurück. Willst du das Brandmal tragen?
+      </p>
+      <div class="veil__actions">
+        <button type="button" id="oath-confirm" class="btn primary">Ja, ich trage es</button>
+        <button type="button" id="oath-cancel" class="btn btn--muted">Nein, ich kehre um</button>
+      </div>
     </div>
   </div>
 

@@ -12,13 +12,22 @@ const gateForm = document.getElementById("gate-form");
 const gateInput = document.getElementById("gate-input");
 const gateBtn = document.getElementById("gate-btn");
 const gateCard = document.getElementById("gate-card");
-const forbiddenOverlay = document.getElementById("bait-overlay");
+const secretGate = document.getElementById("secret-gate");
+const secretForm = document.getElementById("secret-form");
+const secretAnswerInput = document.getElementById("secret-answer");
+const secretError = document.getElementById("secret-error");
+const secretCancel = document.getElementById("secret-cancel");
+const forbiddenReveal = document.getElementById("forbidden-reveal");
+const finalOath = document.getElementById("final-oath");
+const oathConfirm = document.getElementById("oath-confirm");
+const oathCancel = document.getElementById("oath-cancel");
 
 const pages = document.querySelectorAll(".page");
 const verifyPageId = "page-verify";
 const introPageId = "page-intro";
 const captchaPageId = "page-captcha";
 const coordsPageId = "page-coords";
+const forbiddenPageId = "page-forbidden";
 
 let audioStarted = false;
 let audioCtx = null;
@@ -26,9 +35,10 @@ let analyser = null;
 let dataArray = null;
 let bufferLength = 0;
 let gateUnlocked = false;
-let baitPulseTimer = null;
 
 const GATE_ACCEPTED = ["alexander luther", "alex luther"];
+const SECRET_ANSWER = "donnerdaumen";
+const FORBIDDEN_URL = "https://www.meatspin.com/";
 
 function updateFeedback(text, variant = "") {
   if (!feedback) return;
@@ -167,12 +177,6 @@ function showPage(pageId) {
     page.classList.toggle("page--active", isActive);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (pageId === coordsPageId) {
-    startBaitPulse();
-  } else {
-    stopBaitPulse();
-    hideBaitOverlay();
-  }
 }
 
 function normaliseName(value = "") {
@@ -705,41 +709,102 @@ if (forbiddenBtn) {
   forbiddenBtn.addEventListener("click", (e) => {
     e.preventDefault();
     kickstartAudio();
-    playRevealSound();
-    showBaitOverlay();
-    setTimeout(() => {
-      hideBaitOverlay();
-      window.open("https://www.meatspin.com", "_blank", "noopener");
-    }, 1500);
+    playConfirmSound();
+    openSecretGate();
   });
 }
 
-function showBaitOverlay() {
-  if (!forbiddenOverlay) return;
-  forbiddenOverlay.classList.remove("hidden");
-  forbiddenOverlay.setAttribute("aria-hidden", "false");
-}
-
-function hideBaitOverlay() {
-  if (!forbiddenOverlay) return;
-  forbiddenOverlay.classList.add("hidden");
-  forbiddenOverlay.setAttribute("aria-hidden", "true");
-}
-
-function startBaitPulse() {
-  if (!forbiddenBtn) return;
-  stopBaitPulse();
-  forbiddenBtn.classList.add("danger-pulse");
-  baitPulseTimer = setInterval(() => {
-    forbiddenBtn.classList.toggle("danger-pulse");
-    setTimeout(() => forbiddenBtn.classList.add("danger-pulse"), 900);
-  }, 3600);
-}
-
-function stopBaitPulse() {
-  if (baitPulseTimer) {
-    clearInterval(baitPulseTimer);
-    baitPulseTimer = null;
+function openSecretGate() {
+  if (!secretGate) return;
+  secretGate.classList.remove("hidden");
+  secretGate.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => secretGate.classList.add("veil--visible"));
+  if (secretAnswerInput) {
+    secretAnswerInput.value = "";
+    secretAnswerInput.focus();
   }
-  if (forbiddenBtn) forbiddenBtn.classList.remove("danger-pulse");
+  if (secretError) {
+    secretError.textContent = "";
+    secretError.classList.remove("veil__error--show");
+  }
 }
+
+function closeSecretGate() {
+  if (!secretGate) return;
+  secretGate.classList.remove("veil--visible");
+  secretGate.setAttribute("aria-hidden", "true");
+  setTimeout(() => {
+    secretGate.classList.add("hidden");
+  }, 220);
+}
+
+function isSecretAnswerCorrect(value = "") {
+  return value.trim().toLowerCase() === SECRET_ANSWER;
+}
+
+function handleSecretSuccess() {
+  playVictorySound();
+  if (forbiddenReveal) {
+    forbiddenReveal.classList.remove("hidden");
+  }
+  if (forbiddenBtn) {
+    forbiddenBtn.disabled = true;
+    forbiddenBtn.classList.add("btn--sealed");
+    forbiddenBtn.textContent = "Tor geöffnet";
+  }
+  closeSecretGate();
+  openFinalOath();
+}
+
+if (secretForm) {
+  secretForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = secretAnswerInput ? secretAnswerInput.value : "";
+    if (isSecretAnswerCorrect(value)) {
+      handleSecretSuccess();
+    } else if (secretError) {
+      secretError.textContent = "Die Wache schweigt. Falscher Name.";
+      secretError.classList.add("veil__error--show");
+      if (secretAnswerInput) secretAnswerInput.focus();
+    }
+  });
+}
+
+if (secretCancel) {
+  secretCancel.addEventListener("click", () => {
+    closeSecretGate();
+  });
+}
+
+function openFinalOath() {
+  if (!finalOath) return;
+  finalOath.classList.remove("hidden");
+  finalOath.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => finalOath.classList.add("veil--visible"));
+}
+
+function closeFinalOath() {
+  if (!finalOath) return;
+  finalOath.classList.remove("veil--visible");
+  finalOath.setAttribute("aria-hidden", "true");
+  setTimeout(() => finalOath.classList.add("hidden"), 220);
+}
+
+if (oathConfirm) {
+  oathConfirm.addEventListener("click", () => {
+    window.location.href = FORBIDDEN_URL;
+  });
+}
+
+if (oathCancel) {
+  oathCancel.addEventListener("click", () => {
+    closeFinalOath();
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeSecretGate();
+    closeFinalOath();
+  }
+});
