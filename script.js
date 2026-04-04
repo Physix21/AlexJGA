@@ -38,8 +38,6 @@ let gateUnlocked = false;
 
 const GATE_ACCEPTED = ["alexander luther", "alex luther"];
 const SECRET_ANSWER = "donnerdaumen";
-const FORBIDDEN_URL = "https://www.meatspin.com/";
-
 function updateFeedback(text, variant = "") {
   if (!feedback) return;
   feedback.textContent = text;
@@ -309,16 +307,15 @@ function triggerVictory() {
   }, revealLen);
 }
 
-// Failure messages from previous version, shown on unsuccessful moves
 const failMessages = [
-  "Der Stein schweigt. Dein Phallus bleibt im Dunkel verborgen.",
-  "Die Runen knistern: Noch trägt deine Hand nicht das Gewicht eines wahrhaftigen Phallus.",
-  "Ein kalter Hauch: Der Kreis murmelnd, du seist eher Wanderer als Träger des Phallus.",
-  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein.",
-  "Das Orakel schweigt – nicht aus Ehrerbietung, sondern aus Mitleid. Kein Phallus strahlt dir entgegen.",
-  "Die Sterne verdrehen sich schamvoll. Kein Siegel des Phallus brennt in deiner Wahl.",
-  "Ein Raunen geht durch den alten Bund: Dieser Erwählte trägt kein Mal des Phallus bei sich.",
-  "Die Wächter wenden sich ab. Dein Zeichen verblasst – der wahre Phallus bleibt dir verborgen."
+  "Der Stein schweigt. Noch erkennt der Kreis dich nicht als Träger des Siegels.",
+  "Die Runen knistern: Deine Hand sucht den rechten Takt noch immer vergebens.",
+  "Ein kalter Hauch fährt durch das Metall. Der Durchlass verlangt eine würdigere Wahl.",
+  "Die Flamme verzieht sich spöttisch. Unwürdig, raunt der Schatten, war dieser Griff.",
+  "Das Orakel schweigt – nicht aus Ehrerbietung, sondern weil dein Ritus noch unvollendet ist.",
+  "Die Sterne verdunkeln sich. Kein reines Zeichen brennt in dieser Fügung.",
+  "Ein Raunen geht durch den alten Bund: Der Erwählte muss fester in den Kreis greifen.",
+  "Die Wächter wenden sich ab. Dein Zeichen verblasst, ehe es die Schwelle tragen kann."
 ];
 let failMessageIndex = 0;
 
@@ -792,7 +789,9 @@ function closeFinalOath() {
 
 if (oathConfirm) {
   oathConfirm.addEventListener("click", () => {
-    window.location.href = FORBIDDEN_URL;
+    playNavSound();
+    closeFinalOath();
+    showPage(forbiddenPageId);
   });
 }
 

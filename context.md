@@ -16,10 +16,22 @@
 
 ## Aktuelle Site-Struktur (Stand Repository)
 - Start: „Vorsiegel der Gilde“ – Nameingabe (gültig: „alexander luther“, „alex luther“) schaltet weiter.
-- Intro: „Brief der Gilde“ – Text ruft Alex in die bedrohte Welt, führt zur Prüfung.
+- Intro: „Brief der Gilde“ – Text bindet den Balkonfund (Brief + Gewandung) direkt an den digitalen Durchlass und führt zur Prüfung.
 - Prüfung: „Die Siegel der Unbeugsamen“ (Sigillationskreis-Puzzle, graphisches Knoten-Board). Feedback-Text und Audio-Visualizer aktiv. Ziel: alle Knoten entzünden.
-- Erfolg: „Einlass gewährt“ – Koordinaten werden gezeigt (`51.072043, 13.756919`), Warnbox mit „Berühre nicht“-Knopf (verbotenes Wissen).
+- Erfolg: „Einlass gewährt“ – Koordinaten werden gezeigt (`51.072043, 13.756919`) und der Übergang von Brief/Gewandung zum realen Sammelpunkt wird betont.
+- Zweites Siegel: Wissensfrage vor der letzten Weisung; nach dem Schwur bleibt der Nutzer auf der Website und landet in „Verbotene Kunde“, statt auf einem externen Gag.
 - Assets: `musik.mp3` (Loop), `chooseelement.mp3`, `buttonnextpage.mp3`, `reveal.mp3`; WebAudio-Visualizer im Canvas; Schriften Cinzel & Cormorant Garamond.
+
+## Abgleich Website ↔ Story
+- Die Website funktioniert am stärksten, wenn sie wie die direkte Fortsetzung des Briefes wirkt: QR-Code scannen, Name beweisen, Sigillationskreis bestehen, Koordinaten empfangen, letzte Weisung für den Aufbruch lesen.
+- Texte sollen Alex nie wie einen normalen Website-Besucher behandeln, sondern wie einen bereits Berufenen, der nur noch durch das digitale Tor schreitet.
+- Der digitale Part sollte keine ironische Ausbruchsstelle haben; auch Feedback- und Abschluss-Texte bleiben würdevoll, düster und bündig.
+
+## Ideale Einbindung in die Storyline
+- Der Brief auf dem Balkon ist der Prolog. Er enthält QR-Code, Gewandung und erste Prophezeiung.
+- Die Website ist Akt I: der Beweis, dass Alex dem Ruf folgt. Jeder Screen bestätigt einen Schritt der Geschichte: Identität → Prüfung → Offenbarung → Marschbefehl.
+- Die Koordinaten-Seite ist der Übergang in die reale Welt. Dort muss klar werden, dass Alex jetzt die Gewandung anlegt, den Brief mitnimmt und zum Treffpunkt zieht.
+- „Verbotene Kunde“ ist kein Witz- oder Link-Out, sondern die letzte in-world Weisung vor dem echten Tagesprogramm. So bleibt die Immersion bis zum physischen Treffen ungebrochen.
 
 ## Leitideen für neue Prompts/Änderungen
 - Website = direkte Fortsetzung des physischen Briefs; dieselbe Stimme und Symbolik.
