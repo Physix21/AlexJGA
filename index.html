@@ -24,20 +24,20 @@
     <section class="page page--active" id="page-verify" data-page="verify">
       <header class="hero">
         <div class="hero__content gate-card" id="gate-card">
-          <p class="eyebrow">Vorsiegel der Gilde</p>
-          <h1>Wahrheit vor Eintritt</h1>
+          <p class="eyebrow">Schwellentafel der Gilde</p>
+          <h1>Wahrheit vor dem Durchlass</h1>
           <p class="lede lede--drop">
-            Vor der Schwelle wird kein Schatten geduldet. Nur Alexander Luther darf den Kreis betreten. Sprich deinen Namen, und das Vorsiegel entscheidet.
+            Vor der Schwelle schweigt jedes falsche Wort. Nur Alexander Luther entzündet den ersten Riss im Dunkel. Sprich deinen Namen auf die Schwellentafel, und das Erz der Gilde entscheidet.
           </p>
 
           <form id="gate-form" class="gate__form" autocomplete="off">
             <label class="input">
-              <span class="input__label">Nenne deinen wahren Namen</span>
-              <input id="gate-input" type="text" name="name" placeholder="Name" spellcheck="false" autocomplete="name" />
-              <span class="input__hint">Nur der echte Name entzündet das Vorsiegel.</span>
+              <span class="input__label">Sprich den wahren Namen</span>
+              <input id="gate-input" type="text" name="name" placeholder="Name" spellcheck="false" autocomplete="name" aria-describedby="gate-hint" />
+              <span id="gate-hint" class="input__hint">Nur der echte Laut entzündet die Schwellentafel.</span>
             </label>
             <div class="gate__actions">
-              <button id="gate-btn" class="btn primary" type="submit" disabled data-nav-sound="next-page">EINKEHREN</button>
+              <button id="gate-btn" class="btn primary" type="submit" disabled data-nav-sound="next-page" aria-label="Schwellentafel anrufen">EINKEHREN</button>
             </div>
           </form>
         </div>
@@ -48,11 +48,11 @@
     <section class="page" id="page-intro" data-page="intro">
       <header class="hero">
         <div class="hero__content">
-          <h1>Brief der Gilde</h1>
+          <h1>Gildenedikt</h1>
           <p class="lede lede--drop">
-            Alex, der du den versiegelten Brief fandst: Dies ist die Eingangsschwelle der Gilde. Hinter dem Horizont reißt ein Dämon die Welt auf – nur wer den Sigillationskreis entzündet, darf in unsere Reihen treten und das Böse binden. Versage, und die Nacht frisst alles.
+            Alexander Luther, Träger des geflügelten Zeichens: Dies ist das Schwellenheiligtum. Jenseits des Horizonts zerrt ein Dämon an den Fugen der Welt. Nur wer den Sigillationskreis entzündet, darf in unsere Reihen treten und das Böse bannen. Strauchle, und die Nacht frisst alles.
           </p>
-          <button id="start-btn" class="btn primary" data-nav-sound="next-page">Prüfung beginnen</button>
+          <button id="start-btn" class="btn primary" data-nav-sound="next-page" aria-label="Zum Sigillum schreiten">Prüfung beginnen</button>
         </div>
       </header>
     </section>
@@ -63,29 +63,29 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <h2>Die Siegel der Unbeugsamen</h2>
-              <p class="lede">Nur wer alle Siegel entzündet, kann wahrhaftig der Auserwählte sein.</p>
+              <h2>Siegel des unbeugsamen Phallus</h2>
+              <p class="lede">Ring und Rhombus mit sechzehn Knoten. Zwei Flammen lodern, der Rest harrt. Entzünde jeden Knoten, und der Dämon weicht.</p>
             </div>
             <div class="puzzle-hud">
               <div class="puzzle-counters">
                 <div class="counter">
-                  <div class="counter__label">Vorsehung</div>
+                  <div class="counter__label">Augenmaß des Orakels</div>
                   <div id="hud-foresight" class="counter__value">—</div>
                 </div>
                 <div class="counter">
-                  <div class="counter__label">Ritus</div>
+                  <div class="counter__label">Zug der Klinge</div>
                   <div id="hud-moves" class="counter__value">0</div>
                 </div>
               </div>
               <div class="puzzle-actions">
-                <button id="btn-undo" class="btn btn--primary-quiet" disabled>Rückgängig</button>
+                <button id="btn-undo" class="btn btn--primary-quiet" disabled aria-label="Letzten Zug zurücknehmen">Rückgängig</button>
                 <button id="btn-reset" class="btn btn--muted" aria-label="Ritus neu beginnen">Neubeginn</button>
               </div>
             </div>
           </div>
 
           <div id="feedback" class="feedback" role="status" aria-live="polite">
-            Die Gilde wartet auf deinen ersten Zug. Entzünde den Kreis, Alex.
+            Die Gilde wartet auf deinen ersten Zug. Entzünde den Kreis, Auserwählter.
           </div>
 
           <div class="graph-board" id="graph-board">
@@ -99,12 +99,12 @@
     <!-- Seite 3 -->
     <section class="page" id="page-coords" data-page="coords">
       <div class="card success">
-        <h2>Einlass gewährt</h2>
+        <h2>Weihe gewährt</h2>
         <p class="lede">
-          Der Kreis antwortete, die Gilde nickt. Alex, du hast die Schwelle überschritten. Trage diese Koordinaten zum Sammelpunkt der Erwählten, wo das nächste Ritual auf dich wartet.
+          Der Kreis antwortete, die Gilde nickt. Alexander Luther, du hast die Schwelle überschritten. Trage diese Fährte zum Sammelhort der Erwählten, wo das nächste Ritual auf dich lauert.
         </p>
         <div class="coords">
-          <span class="coords__label">Koordinaten des Rufes</span>
+          <span class="coords__label">Koordinaten des Sammelhortes</span>
           <span class="coords__value" id="coords-value">51.072043, 13.756919</span>
         </div>
         <p class="closing">
@@ -112,10 +112,10 @@
         </p>
 
         <div class="warning">
-          <p class="warning__title">Tor der Versiegelten Kunde</p>
+          <p class="warning__title">Velumtor · Zweites Siegel</p>
           <button id="forbidden-btn" class="btn primary">Tor anrufen</button>
           <p class="warning__text">
-            Die Wache duldet nur den, dessen Name im Brief stand. Ein zweites Siegel stellt die Frage, bevor die verbotene Kunde sich zeigt.
+            Die Wache duldet nur den, dessen Name im Brief stand. Vor der verbotenen Kunde steht die Fehdefrage.
           </p>
           <div id="forbidden-reveal" class="warning__reveal hidden" role="status">
             Du hast dich ausgewiesen, Alex. Die Wache senkt die Lanze – das Tor ist offen.
@@ -133,7 +133,7 @@
         </p>
         <div class="coords">
           <span class="coords__label">Zeichen des Durchlasses</span>
-          <span class="coords__value">Sigillum Obscurum · Sanctum VIII</span>
+          <span class="coords__value">Sigillum Obscurum · Sanctum Octavum</span>
         </div>
         <p class="closing">
           Jenseits der Schwelle wartet das wahre Programm. Tritt hinaus – die Gilde folgt deinem Schritt.
@@ -148,15 +148,15 @@
       <div class="victory__ring victory__ring--inner"></div>
     </div>
     <div class="victory__text">
-      <div class="victory__title">Würdigkeit bestätigt</div>
+      <div class="victory__title">Würdigung vollzogen</div>
       <div class="victory__subtitle">Die Flammen neigen sich.</div>
     </div>
   </div>
 
   <div id="secret-gate" class="veil hidden" aria-hidden="true">
     <div class="veil__panel">
-      <p class="eyebrow">Zweites Siegel</p>
-      <h3>Torfrage der Wache</h3>
+      <p class="eyebrow">Velumtor</p>
+      <h3>Fehdefrage der Wache</h3>
       <p class="veil__lede">
         Welcher tapfere Geselle unterlag in den S4S BEGINNER.FINALS dem allmächtigen Physix am fünften Tage des Mai im Jahre 2024?
       </p>
@@ -165,9 +165,9 @@
           <span class="input__label">Sprich den Namen</span>
           <input id="secret-answer" type="text" name="secret-answer" placeholder="Name des Gefallenen" spellcheck="false" autocomplete="off" required />
         </label>
-        <p class="hint">Nur Alex kennt die Antwort. Ein falsches Wort – und die Wache bleibt stumm.</p>
+        <p class="hint">Nur Alexander Luther kennt die Antwort. Ein falsches Wort – und die Wache bleibt stumm.</p>
         <div class="veil__actions">
-          <button type="submit" class="btn primary">Siegel öffnen</button>
+          <button type="submit" class="btn primary">Velumtor öffnen</button>
           <button type="button" id="secret-cancel" class="btn btn--muted">Zurück</button>
         </div>
         <p id="secret-error" class="veil__error" role="alert"></p>
@@ -190,7 +190,7 @@
   </div>
 
   <footer class="footer">
-    <span>Für Alex, den wahren Nachfolger Luthers</span>
+    <span>Für Alexander Luther, Erbe des Schwellenheiligtums</span>
   </footer>
 
   <script src="script.js"></script>

@@ -311,14 +311,14 @@ function triggerVictory() {
 
 // Failure messages from previous version, shown on unsuccessful moves
 const failMessages = [
-  "Der Stein schweigt. Dein Phallus bleibt im Dunkel verborgen.",
-  "Die Runen knistern: Noch trägt deine Hand nicht das Gewicht eines wahrhaftigen Phallus.",
-  "Ein kalter Hauch: Der Kreis murmelnd, du seist eher Wanderer als Träger des Phallus.",
-  "Die Flamme verzieht sich spöttisch. Unwürdig, spricht der Schatten. Dein Phallus scheint zu klein.",
-  "Das Orakel schweigt – nicht aus Ehrerbietung, sondern aus Mitleid. Kein Phallus strahlt dir entgegen.",
-  "Die Sterne verdrehen sich schamvoll. Kein Siegel des Phallus brennt in deiner Wahl.",
-  "Ein Raunen geht durch den alten Bund: Dieser Erwählte trägt kein Mal des Phallus bei sich.",
-  "Die Wächter wenden sich ab. Dein Zeichen verblasst – der wahre Phallus bleibt dir verborgen."
+  "Die Schwellentafel knistert, doch kein Phalluszeichen lodert. Deine Hand war zu leicht.",
+  "Der Ring ruft: Noch hältst du nicht das Gewicht des unbeugsamen Phallus.",
+  "Ein kalter Hauch: Die Gilde sieht einen Wanderer, keinen Träger des Zeichens.",
+  "Die Flamme verzog sich spöttisch. Unwürdig, flüstert der Schatten.",
+  "Das Orakel schweigt – nicht ehrfürchtig, sondern betrübt. Kein Phallus strahlt dir entgegen.",
+  "Die Sterne wenden sich ab. Kein Siegel des Phallus brennt in deiner Wahl.",
+  "Ein Raunen im Bund: Dieser Schritt war fehl, der Phallus blieb verborgen.",
+  "Die Wache senkt den Blick. Deine Klinge traf kein Siegel."
 ];
 let failMessageIndex = 0;
 
@@ -459,7 +459,7 @@ function puzzleBuildBoard() {
     btn.className = "node";
     btn.dataset.v = v;
     btn.setAttribute("aria-pressed", "false");
-    btn.setAttribute("aria-label", `Knoten ${v}`);
+    btn.setAttribute("aria-label", `Siegelknoten ${v + 1}`);
     btn.style.setProperty("--nx", `${PUZZLE_NODE_POS[v][0]}%`);
     btn.style.setProperty("--ny", `${PUZZLE_NODE_POS[v][1]}%`);
     btn.setAttribute("type", "button");
@@ -594,7 +594,7 @@ function puzzleReset() {
   puzzleUndoStack = [];
   puzzlePreviewNode = -1;
   failMessageIndex = 0;
-  updateFeedback("Die Gilde wartet. Entzünde den Kreis erneut.");
+  updateFeedback("Die Schwellentafel erlischt. Entzünde den Kreis von Neuem.");
   puzzleRender();
 }
 
@@ -626,7 +626,7 @@ function puzzleInit() {
   const hudMoves = document.getElementById("hud-moves");
   if (hudMoves) hudMoves.textContent = 0;
 
-  updateFeedback("Die Gilde erwartet den ersten Zug. Der Dämon lauert.");
+  updateFeedback("Der Kreis harrt auf dein Feuer, Alexander Luther.");
 
   puzzleRender();
 }

@@ -1,0 +1,9 @@
+- Ziel: Als Dorfbewohner den Dämon hinrichten; Böse gewinnen, wenn der Dämon mit mindestens einer weiteren Person überlebt.
+- Ablauf: Erste Nacht kein Todesopfer; Minions lernen den Dämon kennen, der Dämon erfährt drei Rollen, die garantiert nicht im Spiel sind (gute Fake-Claims).
+- Tag: Freie Gespräche und Flüsterrunden; einmal pro Tag darf nominiert werden, Hinrichtung mit Mehrheit der lebenden Hände. Tote behalten genau eine Stimme für den Rest der Partie.
+- Nacht: Rollen werden still per Antippen geweckt; Fähigkeiten folgen der vorgegebenen Nachtreihenfolge. Tote schlafen durch und erhalten keine neuen Infos.
+- Fähigkeiten: Jede Rolle kann mindestens einmal etwas; Lügen und offene Rollen-Claims sind erlaubt. Betrunkene oder vergiftete Rollen bekommen unzuverlässige Infos.
+- Überleben nach dem Tod: Fährigkeiten enden, aber du diskutierst weiter und kannst andere bitten, für dich zu nominieren.
+- Kein Kill in einer Nacht kann bedeuten: Mönch hat geschützt, Ziel war Soldat oder Dämon hat sich selbst geopfert.
+- Dämon-Wechsel: Stirbt der Imp bei ≥5 Lebenden, kann die Scharlachrote Frau (oder bei Selbstmord ein Minion) zum neuen Dämon werden.
+- Verhaltenstipps: Stimme sparsam einsetzen, Informationen portioniert teilen, auf Widersprüche in Claims achten, private Gespräche nutzen, aber nie alleine einer Quelle trauen.
