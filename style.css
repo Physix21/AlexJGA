@@ -20,6 +20,11 @@
   --tracking-wide: 0.08em;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -882,36 +887,187 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  body {
+    line-height: 1.55;
+  }
+
+  .page {
+    padding: 2.2rem 0.9rem 2.8rem;
+  }
+
   .hero {
-    padding-top: 3.2rem;
+    padding: 2.8rem 0.55rem 1.8rem;
   }
 
   .hero__content {
-    padding: 1.9rem 1.4rem;
+    width: min(720px, calc(100% - 12px));
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+
+  h1,
+  h2 {
+    margin: 0.1rem 0 0.7rem;
+    letter-spacing: 0.06em;
+    font-size: 1.36rem;
+  }
+
+  h3 {
+    font-size: 1.08rem;
+    letter-spacing: 0.075em;
   }
 
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }
 
+  .trial {
+    padding: 0.4rem 0.25rem 2rem;
+    gap: 0.75rem;
+  }
+
+  .card {
+    width: min(720px, calc(100% - 12px));
+    padding: 1.1rem 0.9rem;
+  }
+
   .card__header {
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.35rem;
   }
 
   .btn {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
     text-align: center;
+    padding: 0.72rem 0.9rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    min-height: 42px;
   }
 
   .graph-board {
-    max-width: 92vw;
-    margin-top: 1.4rem;
+    max-width: 94vw;
+    margin-top: 1rem;
   }
 
   .lede {
-    font-size: 1.08rem;
+    font-size: 1rem;
+    line-height: 1.62;
     max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hint,
+  .input__hint,
+  .footer {
+    font-size: 0.82rem;
+  }
+
+  .input__label {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+  }
+
+  .input input {
+    padding: 0.72rem 0.85rem;
+    font-size: 0.98rem;
+  }
+
+  .gate__actions,
+  .puzzle-actions,
+  .veil__actions {
+    width: 100%;
+  }
+
+  .gate__actions .btn.primary {
+    min-width: 0;
+    width: 100%;
+    letter-spacing: 0.09em;
+  }
+
+  .counter {
+    padding: 0.45rem 0.65rem;
+    border-radius: 11px;
+    min-width: 92px;
+  }
+
+  .counter__label {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .counter__value {
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .counter--inline {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .feedback {
+    padding: 0.8rem 0.85rem;
+    min-height: 46px;
+    font-size: 0.96rem;
+  }
+
+  .timeout-panel {
+    padding: 0.75rem 0.8rem;
+    gap: 0.55rem;
+  }
+
+  .timeout-panel__text {
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .coords {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.35rem;
+    padding: 0.8rem 0.95rem;
+    width: 100%;
+  }
+
+  .coords__label {
+    font-size: 0.74rem;
+    letter-spacing: 0.09em;
+  }
+
+  .coords__value {
+    font-size: 1rem;
+    letter-spacing: 0.045em;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .warning {
+    padding: 0.75rem 0.85rem;
+    gap: 0.4rem;
+  }
+
+  .warning__title {
+    font-size: 0.88rem;
+  }
+
+  .warning__text,
+  .warning__reveal {
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .veil__panel {
+    width: min(520px, 95vw);
+    padding: 1.15rem 0.95rem;
+    border-radius: 14px;
   }
 }
 
@@ -1100,17 +1256,95 @@ h3 {
 @media (max-width: 640px) {
   .puzzle-hud {
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     flex-wrap: wrap;
     width: 100%;
+    padding: 0;
   }
 
   .puzzle-actions {
     flex: 1 1 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    align-items: stretch;
   }
 
   .puzzle-actions .btn {
-    flex: 1;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .puzzle-actions .counter--inline {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .counter {
+    padding: 0.45rem 0.65rem;
+    border-radius: 11px;
+    min-width: 0;
+  }
+
+  .counter__label {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .counter__value {
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .node {
+    width: clamp(40px, 11.6vw, 52px);
+    height: clamp(40px, 11.6vw, 52px);
+    border-width: 1.7px;
+  }
+}
+
+@media (max-width: 420px) {
+  .page {
+    padding: 1.8rem 0.65rem 2.2rem;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.18rem;
+    letter-spacing: 0.045em;
+  }
+
+  .lede {
+    font-size: 0.93rem;
+    line-height: 1.54;
+  }
+
+  .btn {
+    font-size: 0.84rem;
+    padding: 0.66rem 0.74rem;
+    letter-spacing: 0.025em;
+  }
+
+  .counter__label {
+    font-size: 0.56rem;
+  }
+
+  .counter__value {
+    font-size: 0.92rem;
+  }
+
+  .node {
+    width: clamp(36px, 10.8vw, 46px);
+    height: clamp(36px, 10.8vw, 46px);
+  }
+
+  .coords__value {
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer {
+    font-size: 0.76rem;
   }
 }
 
