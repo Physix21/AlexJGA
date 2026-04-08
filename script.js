@@ -21,6 +21,9 @@ const forbiddenReveal = document.getElementById("forbidden-reveal");
 const finalOath = document.getElementById("final-oath");
 const oathConfirm = document.getElementById("oath-confirm");
 const oathCancel = document.getElementById("oath-cancel");
+const hudTimer = document.getElementById("hud-timer");
+const puzzleTimeoutPanel = document.getElementById("puzzle-timeout-panel");
+const timeoutContinueBtn = document.getElementById("timeout-continue-btn");
 
 const pages = document.querySelectorAll(".page");
 const verifyPageId = "page-verify";
@@ -39,6 +42,7 @@ let gateUnlocked = false;
 const GATE_ACCEPTED = ["alexander luther", "alex luther"];
 const SECRET_ANSWER = "donnerdaumen";
 const FORBIDDEN_URL = "https://www.meatspin.com/";
+const PUZZLE_TIME_LIMIT_SECONDS = 6 * 60;
 
 function updateFeedback(text, variant = "") {
   if (!feedback) return;
@@ -290,6 +294,9 @@ function playVictorySound() {
 }
 
 function triggerVictory() {
+  puzzleSolved = true;
+  puzzleTimedOut = false;
+  stopPuzzleTimer();
   playRevealSound();
   const revealLen =
     revealSfx && isFinite(revealSfx.duration) && revealSfx.duration > 0
@@ -403,28 +410,66 @@ let puzzleMoveCount = 0;
 let puzzleUndoStack = [];
 let puzzlePreviewNode = -1; // -1 = no preview active
 let puzzleBoardBuilt = false;
-let puzzleCachedForesight = -1; // cached BFS result, -1 = not yet computed
+let puzzleTimerId = null;
+let puzzleTimeLeft = PUZZLE_TIME_LIMIT_SECONDS;
+let puzzleTimedOut = false;
+let puzzleSolved = false;
 
-// BFS from startState to GOAL (early exit when goal found)
-function puzzleComputeForesight(startState) {
-  if (startState === PUZZLE_GOAL) return 0;
-  const dist = new Uint16Array(1 << 16).fill(0xFFFF);
-  dist[startState] = 0;
-  const q = [startState];
-  let head = 0;
-  while (head < q.length) {
-    const s = q[head++];
-    const d = dist[s];
-    for (let v = 0; v < PUZZLE_NUM_NODES; v++) {
-      const ns = s ^ PUZZLE_MOVE_MASK[v];
-      if (dist[ns] === 0xFFFF) {
-        dist[ns] = d + 1;
-        if (ns === PUZZLE_GOAL) return dist[ns];
-        q.push(ns);
-      }
+function formatPuzzleTime(totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const seconds = (totalSeconds % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+function renderPuzzleTimer() {
+  if (!hudTimer) return;
+  hudTimer.textContent = formatPuzzleTime(Math.max(0, puzzleTimeLeft));
+}
+
+function stopPuzzleTimer() {
+  if (!puzzleTimerId) return;
+  clearInterval(puzzleTimerId);
+  puzzleTimerId = null;
+}
+
+function showPuzzleTimeoutPanel() {
+  if (!puzzleTimeoutPanel) return;
+  puzzleTimeoutPanel.classList.remove("hidden");
+}
+
+function hidePuzzleTimeoutPanel() {
+  if (!puzzleTimeoutPanel) return;
+  puzzleTimeoutPanel.classList.add("hidden");
+}
+
+function handlePuzzleTimeout() {
+  if (puzzleTimedOut || puzzleSolved) return;
+  puzzleTimedOut = true;
+  puzzleTimeLeft = 0;
+  renderPuzzleTimer();
+  updateFeedback("Die sechs Minuten sind verstrichen. Der Kreis bleibt unvollendet.", "error");
+  showPuzzleTimeoutPanel();
+  puzzleRender();
+}
+
+function startPuzzleTimer() {
+  stopPuzzleTimer();
+  puzzleTimeLeft = PUZZLE_TIME_LIMIT_SECONDS;
+  puzzleTimedOut = false;
+  renderPuzzleTimer();
+
+  puzzleTimerId = setInterval(() => {
+    if (puzzleSolved || puzzleTimedOut) {
+      stopPuzzleTimer();
+      return;
     }
-  }
-  return dist[PUZZLE_GOAL];
+    puzzleTimeLeft -= 1;
+    renderPuzzleTimer();
+    if (puzzleTimeLeft <= 0) {
+      stopPuzzleTimer();
+      handlePuzzleTimeout();
+    }
+  }, 1000);
 }
 
 function puzzleBuildBoard() {
@@ -485,6 +530,7 @@ function puzzleBuildBoard() {
 }
 
 function puzzleNodeTap(v) {
+  if (puzzleTimedOut || puzzleSolved) return;
   kickstartAudio();
   if (puzzlePreviewNode === v) {
     // Second tap on same node → execute move
@@ -498,6 +544,7 @@ function puzzleNodeTap(v) {
 }
 
 function puzzleExecuteMove(v) {
+  if (puzzleTimedOut || puzzleSolved) return;
   playConfirmSound();
   // Save for undo
   puzzleUndoStack.push({ state: puzzleState, moveCount: puzzleMoveCount });
@@ -511,6 +558,8 @@ function puzzleExecuteMove(v) {
   puzzleRender();
 
   if (puzzleState === PUZZLE_GOAL) {
+    puzzleSolved = true;
+    stopPuzzleTimer();
     setTimeout(() => {
       updateFeedback("Der Kreis ist geweiht. Weihe vollendet.", "success");
       triggerVictory();
@@ -558,6 +607,7 @@ function puzzleRender() {
     el.classList.toggle("node--selected", isSelected);
     el.classList.toggle("node--preview", !!inPreview && !isSelected);
     el.setAttribute("aria-pressed", active ? "true" : "false");
+    el.disabled = puzzleTimedOut || puzzleSolved;
   });
 
   const svg = document.getElementById("graph-svg");
@@ -575,10 +625,14 @@ function puzzleRender() {
   if (hudMoves) hudMoves.textContent = puzzleMoveCount;
 
   const undoBtn = document.getElementById("btn-undo");
-  if (undoBtn) undoBtn.disabled = puzzleUndoStack.length === 0;
+  if (undoBtn) undoBtn.disabled = puzzleTimedOut || puzzleSolved || puzzleUndoStack.length === 0;
+
+  const resetBtn = document.getElementById("btn-reset");
+  if (resetBtn) resetBtn.disabled = puzzleTimedOut || puzzleSolved;
 }
 
 function puzzleUndo() {
+  if (puzzleTimedOut || puzzleSolved) return;
   if (puzzleUndoStack.length === 0) return;
   const { state, moveCount } = puzzleUndoStack.pop();
   puzzleState = state;
@@ -589,6 +643,7 @@ function puzzleUndo() {
 }
 
 function puzzleReset() {
+  if (puzzleTimedOut || puzzleSolved) return;
   puzzleState = PUZZLE_START;
   puzzleMoveCount = 0;
   puzzleUndoStack = [];
@@ -599,6 +654,8 @@ function puzzleReset() {
 }
 
 function puzzleDevSolve() {
+  puzzleSolved = true;
+  stopPuzzleTimer();
   puzzleState = PUZZLE_GOAL;
   puzzleMoveCount = 0;
   puzzleUndoStack = [];
@@ -615,14 +672,11 @@ function puzzleInit() {
   puzzleMoveCount = 0;
   puzzleUndoStack = [];
   puzzlePreviewNode = -1;
+  puzzleSolved = false;
+  puzzleTimedOut = false;
   failMessageIndex = 0;
-
-  // Use cached BFS foresight (computed once at first call)
-  if (puzzleCachedForesight === -1) {
-    puzzleCachedForesight = puzzleComputeForesight(PUZZLE_START);
-  }
-  const hudForesight = document.getElementById("hud-foresight");
-  if (hudForesight) hudForesight.textContent = puzzleCachedForesight;
+  hidePuzzleTimeoutPanel();
+  startPuzzleTimer();
   const hudMoves = document.getElementById("hud-moves");
   if (hudMoves) hudMoves.textContent = 0;
 
@@ -639,6 +693,14 @@ function startTrial() {
   kickstartAudio();
   puzzleInit();
   showPage(captchaPageId);
+}
+
+function continueAfterPuzzleTimeout() {
+  if (!puzzleTimedOut) return;
+  playConfirmSound();
+  puzzleSolved = true;
+  stopPuzzleTimer();
+  showPage(coordsPageId);
 }
 
 // Wire up start button
@@ -667,6 +729,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetBtn = document.getElementById("btn-reset");
   if (undoBtn) undoBtn.addEventListener("click", () => { kickstartAudio(); puzzleUndo(); });
   if (resetBtn) resetBtn.addEventListener("click", () => { kickstartAudio(); puzzleReset(); });
+  if (timeoutContinueBtn) {
+    timeoutContinueBtn.addEventListener("click", () => {
+      kickstartAudio();
+      continueAfterPuzzleTimeout();
+    });
+  }
 });
 
 // Optional subtle hover parallax on move
@@ -681,11 +749,9 @@ document.addEventListener("pointermove", (e) => {
 window.addEventListener("load", () => {
   kickstartAudio();
   resizeViz();
-  // Pre-build board and cache BFS result before user navigates to puzzle
+  // Pre-build board before user navigates to puzzle
   puzzleBuildBoard();
-  puzzleCachedForesight = puzzleComputeForesight(PUZZLE_START);
-  const hudForesight = document.getElementById("hud-foresight");
-  if (hudForesight) hudForesight.textContent = puzzleCachedForesight;
+  renderPuzzleTimer();
   puzzleRender();
   if (gateInput) gateInput.focus();
 });

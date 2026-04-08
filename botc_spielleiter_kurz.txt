@@ -1,8 +1,0 @@
-- Setup: Sitzkreis, Grimoire parat, Rollenmarker gemäß Spielerzahl (Trouble Brewing: 1 Dämon, 2 Minions, Rest gut; ggf. Baron fügt 2 Außenseiter hinzu).
-- Erste Nacht: Minions leise wecken und auf den Dämon zeigen; Dämon danach wecken, Minions zeigen und drei nicht-im-Spiel-Rollen offenbaren; kein Kill in Nacht 1.
-- Nachtreihenfolge strikt halten (zuerst Giftmischer/Drunk-Effekte, dann Info-Rollen usw.); nie laut Rollen ansagen, immer antippen.
-- Tagphase takten (z.B. 10/8/5 Minuten Gespräche), private Chats erlauben; anschließend Nominierungen nacheinander, Hinrichtung mit Mehrheit lebender Stimmen, Tote je 1 Stimme insgesamt.
-- Transparenz: Vor jeder Tag-zu-Nacht-Umstellung kurz zusammenfassen, wer lebt und ob ein Exekutionsopfer fiel; verkünde nachts gestorbene Personen beim Aufwachen.
-- Balance-Hebel: Optionale Storyteller-Entscheidungen (Soldat überleben lassen, Bürgermeister schützen, «maybe»-Effekte) nutzen, um einseitige Partien zu entschärfen.
-- Fairplay: Gleichbehandlung, keine Hinweise durch Tonfall/Blick; bei Rules-Disput kurz stoppen, Entscheidung treffen, danach weiterspielen.
-- Spielende: Beenden, sobald Ergebnis eindeutig (z.B. nur Dämon + 1 Spieler) oder wenn Imp-Selbstmord/Scharlachrote Frau-Regel greift; Sieg klar ansagen.

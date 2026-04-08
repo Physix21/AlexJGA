@@ -1,0 +1,81 @@
+﻿Blood on the Clocktower – Storyteller-Kompendium (Trouble Brewing)
+==================================================================
+
+Ziel dieser Fassung: Alle Infos, Entscheidungen und Erinnerungen, die du als Spielleiter:in in Trouble Brewing brauchst. Reihenfolge, Tokens, Sonderfälle, typische Fragen – kompakt in einem Dokument.
+
+0) Grundprinzipien für die Leitung
+- Klarheit schlagen: Nutze deutliche Nicks/Kopfbewegungen, tippe leise an die Knie, vermeide gesprochene Aufforderungen bei Nacht.
+- Falsche Infos sind Teil des Spiels: Betrunken/vergiftet = Fähigkeit funktioniert falsch oder gar nicht; du lieferst passende Fehlinfos, hältst es aber konsistent über die Nacht hinweg.
+- Tote bleiben im Spiel: keine Nachtaktionen mehr, aber genau eine verbleibende Stimme. Sie dürfen weiterhin lügen.
+- Keine Rollen-Reveals durch dich: Du bestätigst nur, wenn das Spiel endet.
+- Grimoire ist Wahrheit: Alle States (tot, vergiftet, betrunken, markiert) müssen darin sofort markiert werden, damit du nachts nichts vergisst.
+
+1) Aufbau & Material
+- Sitzkreis mit Lücke für deinen Zugang; Grimoire auf Ständer oder Schoß, so dass es vor Blicken geschützt ist. Clips oben/unten fixieren, Tokens sortiert griffbereit in der Box halten.
+- Bereite drei Bluffrollen (nicht im Beutel) für den Dämon vor und lege sie offen auf ein separates Tableau; zeige sie dem Dämon in der ersten Nacht.
+- Beutel bestücken: 7 Townsfolk, 0 (oder 2, falls Baron) Outsider, 2 Minions, 1 Demon bei 10 Spielenden. Rollenchips nach dem Ziehen sofort ins Grimoire legen.
+
+2) Tages- & Nachtablauf
+- Erste Nacht: Niemand stirbt. Böses Team lernt sich nicht gleichzeitig kennen; erst Minions (ohne Dämon), dann Dämon sieht Minions und drei Bluffrollen.
+- Tag: 10–5 Minuten freie Gespräche; danach Plenum, Nominierungen im Sitzreihenfolge-Reißverschluss, Abstimmung per Handheben. Gleichstand = niemand stirbt.
+- Folge-Nächte: Dämon wählt ein Ziel; danach ggf. Schutz/Interaktionen abwickeln. Verkünde morgens neutral: „Heute ist X gestorben“ oder „Niemand ist gestorben“.
+
+3) Rollen nach Gruppen (mit SL-Hinweisen)
+TOWNSFOLK (gute Kernrollen)
+- Waschweib (Washerwoman): Erste Nacht wach. Zeige 1 Townsfolk-Chip + 2 Spieler; genau eine Person davon hat den Chip. Merke dir die gezeigten Plätze, lege Reminder auf beide Sitze.
+- Bibliothekar (Librarian): Wie Waschweib, aber für Outsider. Zeige „0“ per Finger, falls keine Outsider im Spiel. Hinweis, dass Baron fehlt.
+- Detektiv (Investigator): Wie Waschweib, aber zeigt einen Minion-Chip (nicht den Dämon) und zwei Spieler. 50/50-Bösespur.
+- Koch (Chef): Erste Nacht Zahl 0/1/2 per Finger = wie viele benachbarte Paare böse sind. „Benachbart“ schließt Kreisende über Lücke ein.
+- Empath: Jede Nacht Zahl 0/1/2 zu den direkt lebenden Nachbarn. Überspringt Tote. Vergiftet/Betrunken: gib falsche, aber konsistente Zahl.
+- Wahrsagerin (Fortune Teller): Jede Nacht zwei Spieler zeigen lassen; nicke, falls einer davon der Dämon ist oder die „falsche Fährte“-Person, die du einmalig zu Beginn festlegst. Lege einen Reminder auf diese Köderperson.
+- Totengräber (Undertaker): Ab Nacht 2 (nach erster Hinrichtung) jede Nacht den Charakter des Tages-Hingerichteten zeigen.
+- Mönch: Jede Nacht ab Nacht 2 schützt eine andere Person. Wenn Dämon dasselbe Ziel wählt, stirbt niemand. Mönch kann sich nicht selbst wählen.
+- Rabenhüter (Ravenkeeper): Wenn nachts vom Dämon getötet, sofort auf einen Spieler zeigen und dessen Charakter offen zeigen.
+- Jungfrau (Virgin): Wird sie zum ersten Mal nominiert und der Nominierende ist Townsfolk, stirbt der Nominierende sofort; Jungfrau bleibt leben und Fähigkeit ist verbraucht. Markiere, wenn benutzt.
+- Dämonenjäger (Slayer): Einmal tagsüber ruft er öffentlich einen Schuss auf eine lebende Person aus. Falls Ziel der Dämon ist, stirbt der Dämon sofort. Falscher Claim: spiele ihn ohne Effekt mit.
+- Soldat: Dämonenkill wirkt nicht. Bei Angriff „niemand gestorben“ verkünden; notiere, ob es Soldat oder Schutz war.
+- Bürgermeister (Mayor): Kann nachts durch dich auf jemand anderen umlenken; gewinnt das Gute Team, wenn im Final 3 keine Hinrichtung erfolgt und der Bürgermeister lebt. Ermutige, die Diskussion offen zu lassen.
+
+OUTSIDER (gute Rollen mit Handicap)
+- Butler: Wählt jede Nacht einen „Meister“. Darf nur abstimmen, wenn dieser abstimmt. Sorge, dass du seine Meisterwahl notierst; bei Abstimmung Stimmen nur zählen, wenn Bedingung erfüllt ist.
+- Trunkenbold (Drunk): Zieht Townsfolk-Rolle, ist aber betrunken – seine Fähigkeit funktioniert nie; du gibst passende Fehlinfos. Kennzeichne im Grimoire „Drunk“ über der gezogenen Rolle.
+- Einsiedler (Recluse): Kann als böse registriert werden, wenn gecheckt (Empath/Wahrsagerin etc.). Du entscheidest situativ, ob er als gut oder böse erscheint.
+- Heilige (Saint): Wird sie hingerichtet, gewinnt das böse Team sofort. Signale klar, falls sie nominiert wird; erinnere dich, rechtzeitig zu stoppen.
+
+MINIONS (Schergen)
+- Giftmischer (Poisoner): Jede Nacht eine Person vergiften; deren Fähigkeit (und Infos) sind für diese Nacht + folgenden Tag falsch. Markiere „poison“ und lösche nach Ablauf.
+- Spion (Spy): Sieht jede Nacht dein Grimoire; stelle sicher, dass alle Marker liegen, bevor du zeigst. Er registriert als gut bei Checks, wenn du möchtest.
+- Baron: Bringt +2 Outsider, -2 Townsfolk ins Setup. Outsider-Info hilft Bibliothekar/Wahrsagerin indirekt.
+- Scharlachrote Frau (Scarlet Woman): Sind ≥5 Spieler am Leben und der Dämon stirbt, wird sie zum neuen Dämon. Tausche Rollenchips im Grimoire, lege neues Dämon-Reminder.
+
+DEMON
+- Imp: Jede Nacht (ab Nacht 2) tötet eine Person. Tötet er sich selbst, wird ein Minion zum neuen Imp; tausche Chip, ohne dass das Dorf es erfährt.
+
+4) Zustände & Marker
+- Poisoned: Fähigkeit funktioniert falsch oder gar nicht; Info darf beliebig, aber plausibel verfälscht werden. Hält 1 Nacht + Tag an, dann Marker entfernen.
+- Drunk: Wie Poisoned, aber dauerhaft, bis Rolle gewechselt (z.B. Imp-Selbstmord). Notiere „permanent“.
+- Geschützt: Beim Mönch/Nachtverlagerung Marker, damit du morgens weißt, warum niemand starb.
+- Final-3-Tracking: Markiere, wer noch lebt; Bürgermeister/Heilige/Scarlet-Woman-Schwellen wichtig.
+
+5) Storyteller-Ton und Fairness
+- Lass das gute Team knapp, aber nicht hoffnungslos liegen; nutze optionale Interpretationen (Einsiedler zählt als böse/gut, Bürgermeister-Redirect) um Spannung zu balancieren.
+- Gib Infos sauber: gleiche Gestik für Ja/Nein, konsistente Fingerzahlen.
+- Bei Fehlinfo (Drunk/Poison) bleib konsistent innerhalb derselben Nacht; am nächsten Tag darf Ergebnis wieder korrekt sein.
+
+6) Häufige Fragen (Kurzantworten)
+- „Darf der Spion das Grimoire wirklich jede Nacht sehen?“ – Ja; zeige es, wenn alle Marker liegen.
+- „Wie lange wirkt Poison?“ – Genau die Nacht der Vergiftung + den folgenden Tag; danach fällt es ab, sofern nicht erneut vergiftet.
+- „Bekommen Drunk/Poisonierte immer falsche Infos?“ – Entweder falsche Info oder gar keine Wirkung; du entscheidest situativ, aber musst plausibel bleiben.
+- „Wo sitzen die Leute?“ – Stühle im Kreis/Square mit fester Reihenfolge; du benötigst eine Lücke zum Ein-/Austreten.
+- „Wann endet das Spiel sofort?“ – Wenn Dämon tot und kein Ersatz (oder Imp-Selbstmord + alle Minions tot), oder wenn Heilige hingerichtet wurde (Böse gewinnen). Scarlet Woman/Imp-Selbstmord können das Ende verzögern.
+
+7) Grimoire-Layout-Tipp
+- Oben: Rollenchips pro Sitz; links: Reminder für Zustände (vergiftet, drunk, geschützt); rechts: Bluffrollen & Info-Tokens; unten: Todesmarker in Reihenfolge. So kannst du dem Spion kurz zeigen, ohne zu kramen.
+
+8) Kurze Nacht-Reihenfolge (Trouble Brewing)
+1. Minion-Fähigkeiten: Giftmischer, Spion.
+2. Dämon: Imp wählt Ziel (oder sich selbst).
+3. Nacht-Infos: Empath, Wahrsagerin, Totengräber, Rabenhüter (nur wenn gestorben), Schutz (Mönch), Soldat/Bürgermeister-Redirect verarbeiten.
+(Erste Nacht davor: Waschweib, Bibliothekar, Detektiv, Koch, Empath, Wahrsagerin.)
+
+Keep Talking, Keep Notes – und hab Spaß!

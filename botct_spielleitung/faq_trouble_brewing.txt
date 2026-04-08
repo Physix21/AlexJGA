@@ -1,0 +1,36 @@
+﻿Blood on the Clocktower – Schnelle FAQ (Trouble Brewing)
+========================================================
+
+Allgemein
+- Wann endet das Spiel? Gute gewinnen, sobald der Dämon endgültig tot ist. Böse gewinnen, wenn der Dämon lebt und nur noch 2 Spieler am Leben sind. Früh-Abbruch möglich, wenn Sieg unausweichlich ist (sagt die SL an). 
+- Dürfen Tote weiterreden? Ja. Sie dürfen nicht mehr nominieren, haben aber genau 1 verbleibende Stimme für beliebige spätere Abstimmung. 
+- Werden Rollen aufgedeckt? Nein. Nur der Undertaker erfährt nachts die Rolle des tags Hingerichteten; sonst bleibt alles verborgen. 
+
+Drunk vs. Poison
+- Drunk: Eine Person zieht scheinbar eine Townsfolk-Rolle, ist aber Outsider ohne Fähigkeit – dauerhaft. Nur SL weiß es. 
+- Poisoner: Wählt jede Nacht eine Person; deren Fähigkeit/Infos sind für diese Nacht + Folgetag falsch oder wirkungslos. Marker am nächsten Abend entfernen.  
+- Wahrsagerin & Gift/Betrunk: Ja, Infos dürfen falsch sein oder ausbleiben; rote Heringe existieren trotzdem. 
+
+Spy & Grimoire
+- Spy sieht jede Nacht das komplette Grimoire; er darf bei Checks als gut (Town/Outsider) registrieren. 
+- Vor dem Zeigen sicherstellen: alle Marker korrekt, Bluffs/Belegungen richtig gelegt. 
+
+Scarlet Woman / Imp-Suizid
+- ≥5 Spieler lebend und Dämon stirbt → Scarlet Woman wird Dämon (wecken, Imp-Chip geben). 
+- Imp killt sich selbst → wähle einen Minion als neuen Imp, wecken, Chip tauschen. 
+
+Mayor-Kante
+- Finale 3 ohne Exekution = guter Sieg, falls Bürgermeister lebt. SL darf Nachttod auf andere umlenken, um Spannung zu halten. 
+
+Butler-Stimme
+- Butler darf nur stimmen, wenn der aktuelle Master stimmt. SL notiert Master nachts; bei Abstimmung nur dann werten. 
+
+Registrierungs-Ausnahmen
+- Recluse kann als böse oder gut registrieren, selbst tot. 
+- Spy kann als gut registrieren. 
+- Drunk registriert als Outsider (nicht Town). 
+- Heilige: Exekution = sofort böser Sieg, sofort ansagen. 
+
+Storyteller-Kniffe
+- Falls 4 Spieler leben und gute exekutieren Nicht-Dämon → meist Spiel sofort beenden (Dämon killt auf 3, gewinnt), außer Monk/Soldier könnten Nachtkill verhindern. 
+- Balancing: Gib der schwächeren Seite subtile Hilfe (z.B. Recluse als gut/böse werten, Mayor redirect nutzen). 

@@ -458,6 +458,7 @@ h3 {
   background: linear-gradient(135deg, rgba(198, 166, 103, 0.25), rgba(198, 166, 103, 0.08));
   border-radius: 14px;
   padding: 0.9rem 1.3rem;
+  font-family: var(--font-body);
   font-size: 1rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -562,6 +563,25 @@ h3 {
   border-color: rgba(198, 166, 103, 0.5);
   box-shadow: 0 0 24px rgba(198, 166, 103, 0.32);
   background: linear-gradient(180deg, rgba(198, 166, 103, 0.12), rgba(16, 14, 20, 0.7));
+}
+
+.timeout-panel {
+  margin: 0.85rem auto 0;
+  width: min(640px, 100%);
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 150, 130, 0.5);
+  background: linear-gradient(140deg, rgba(255, 128, 128, 0.12), rgba(255, 128, 128, 0.04));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 128, 128, 0.16);
+  display: grid;
+  gap: 0.7rem;
+  justify-items: center;
+}
+
+.timeout-panel__text {
+  margin: 0;
+  color: #ffd8ce;
+  line-height: 1.5;
 }
 
 .feedback::after {
@@ -911,13 +931,11 @@ h3 {
   padding: 0.2rem 0.2rem 0.2rem 0.6rem;
 }
 
-.puzzle-counters {
-  display: flex;
-  gap: 0.7rem;
-}
-
 .puzzle-actions {
   display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
 }
 
@@ -943,6 +961,10 @@ h3 {
   font-weight: 700;
   color: var(--gold-bright);
   letter-spacing: 0.06em;
+}
+
+.counter--inline {
+  min-width: 110px;
 }
 
 .graph-board {
@@ -1081,10 +1103,6 @@ h3 {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-  }
-
-  .puzzle-counters {
-    flex: 1;
   }
 
   .puzzle-actions {
