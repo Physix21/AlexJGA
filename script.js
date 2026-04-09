@@ -42,7 +42,7 @@ let gateUnlocked = false;
 const GATE_ACCEPTED = ["alexander luther", "alex luther"];
 const SECRET_ANSWER = "donnerdaumen";
 const FORBIDDEN_URL = "https://www.meatspin.com/";
-const PUZZLE_TIME_LIMIT_SECONDS = 6 * 60;
+const PUZZLE_TIME_LIMIT_SECONDS = 7 * 60;
 
 function updateFeedback(text, variant = "") {
   if (!feedback) return;
