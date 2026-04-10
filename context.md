@@ -114,7 +114,7 @@ Vergleicht man Darstellungen von Sexualität und Obszönität auf Bildquellen un
 - Vorsiegel der Gilde: Eine bronzene Schwellentafel prüft den Namen. Nur „alexander luther“ oder „alex luther“ entzündet das Vorsiegel; jeder andere Laut lässt die Platte erzittern und schweigen.
 - Epistel der Gilde: Das Gildenedikt weht wie ein altes Banner im Sturm, ruft Alex in die brechende Welt und weist auf den Dämon, der nur durch Entzündung des Kreises gebannt werden kann.
 - Prüfung – Siegel des unbeugsamen Phallus: Kreis aus Ring und Rhombus, sechzehn Knoten. Zwei Flammen brennen zu Beginn, der Rest ist schwarz. Jeder Zug schlägt Knoten und Nachbarn um. HUD zeigt Augenmaß des Orakels (kalkulierte Mindestzüge) und Zug der Klinge; Undo/Neubeginn stehen bereit. Feedback flüstert Lob oder Spott, stets mit dem Zeichen des Phallus. Der Audio-Visualizer bindet `musik.mp3` an den Atem des Kreises.
-- Weihe – Einlass gewährt: Nach Entzündung aller Siegel öffnet sich der Kreis, die Gilde nickt. Koordinaten werden als Ruf ausgegeben: `51.072043, 13.756919`. Ein stummes Intervall der Bannung kündigt das nächste Ritual an – doch der Bann hält den Dämon nur kurz im Eisen; die Zeit rinnt.
+- Weihe – Einlass gewährt: Nach Entzündung aller Siegel öffnet sich der Kreis, die Gilde nickt. Koordinaten werden als Ruf ausgegeben: `51.068735, 13.759732`. Ein stummes Intervall der Bannung kündigt das nächste Ritual an – doch der Bann hält den Dämon nur kurz im Eisen; die Zeit rinnt.
 - Zweites Siegel – Torfrage der Wache: Warnbox mit „Tor anrufen“. Ein Velumtor verlangt die Antwort auf die Fehdefrage („donnerdaumen“). Nur Alex kennt sie. Bei Erfolg erscheint „Verbotene Kunde“ (Sigillum Obscurum · Sanctum Octavum) und ein letztes Brandmal-Angebot; wer „Ja, ich trage es“ wählt, wird ins verbotene Tor weitergeleitet.
 - Klang & Zier: `musik.mp3` als dunkler Loop; `chooseelement.mp3` für Auswahl, `buttonnextpage.mp3` für Navigation, `reveal.mp3` für Offenbarung. WebAudio-Visualizer im Canvas; metallischer Auswahlklang im Script; Schriften Cinzel & Cormorant Garamond. Dünner Nebel, Kornfilm und Parallax lassen die Oberfläche sichtbar atmen.
 
@@ -133,7 +133,7 @@ Vergleicht man Darstellungen von Sexualität und Obszönität auf Bildquellen un
 - DON’T: CAPTCHA-Optik, ironische Tech-Sprache, moderne Login-/Formularästhetik, bunte Rätsel-UI.
 
 ## Quick Facts für die KI
-- Nächste Fährte (aktuell): Koordinaten 51.072043, 13.756919 → Sammelhort nach bestandener Prüfung.
+- Nächste Fährte (aktuell): Koordinaten 51.068735, 13.759732 → Sammelhort nach bestandener Prüfung.
 - Spieler: Alex (Auserwählter), Rufname auch „Alexander Luther“. Nachname "Luther"
 
 ## Wartungspflicht für die ausführende KI
